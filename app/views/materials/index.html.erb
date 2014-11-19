@@ -1,0 +1,16 @@
+<h1>Listing materials</h1>
+
+<div id="create_new_material">
+<%= form_for :material, :html=>{:id=>"create-material"} do |f| %>
+    <label> 在 <%= f.date_field :when %> </label>
+    <label> 这一天，买了 <%= f.text_field :what %> </label>
+    <label> 。共花费 <%= f.text_field :sum %> </label>
+    <label> 元，单价 <%= f.text_field :price %> </label>
+    <label> 元。 </label>
+    <%= submit_tag "submit" %>
+  <% end %>
+</div>
+
+<div id="material_list">
+  <%= render :partial => 'list'%>
+</div>

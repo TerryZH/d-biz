@@ -1,0 +1,29 @@
+<% unless @materials.empty? %>
+
+  <table id="material_list" >
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Sum</th>
+      <th>Price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @materials.each do |material| %>
+    <tr>
+      <td><%= material.when %></td>
+      <td><%= material.what %></td>
+      <td><%= material.sum %></td>
+      <td><%= material.price %></td>
+      <td><%= link_to "Delete", {:controller=>"materials", :action=>"delete",:id=>material}, :class=>"delete"%></td>
+      <td>Edit</td>
+    </tr>
+  <% end %>
+
+  </table>
+
+<% end %>
+
+

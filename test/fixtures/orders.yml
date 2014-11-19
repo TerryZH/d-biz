@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when: 2014-11-16
+  who: MyString
+  order_id: 
+  sum: 1.5
+
+two:
+  when: 2014-11-16
+  who: MyString
+  order_id: 
+  sum: 1.5

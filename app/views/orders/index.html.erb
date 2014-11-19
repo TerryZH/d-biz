@@ -1,0 +1,15 @@
+<h1>Listing orders</h1>
+
+<div id="create_new_order">
+<%= form_for :order, :html=>{:id=>"create-order"} do |f| %>
+<label> 在 <%= f.date_field :when %> </label>
+<label> 这一天，顾客 <%= f.select :who_id, @customers %> </label>
+<label> 买了 <%= f.text_field :sum %> </label>
+<label> 元的产品。 </label>
+<%= submit_tag "submit" %>
+<% end %>
+</div>
+
+<div id="order_list">
+<%= render :partial => 'list'%>
+</div>

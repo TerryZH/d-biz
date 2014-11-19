@@ -1,0 +1,19 @@
+<h1>Listing customers</h1>
+
+<div id="create_new_customer">
+<%= form_for :customer, :html=>{:id=>"create-customer"} do |f| %>
+<label> 在 <%= f.date_field :when_joined %> </label>
+<label> 这一天，客户 <%= f.text_field :nick %> </label>
+<label> 订购第一单。他／她住在 <%= f.text_field :address %> </label>
+<label> 电话是 <%= f.text_field :tel %> </label>
+<label> 电邮是 <%= f.text_field :email %> </label>
+<label> 微信是 <%= f.text_field :wechat %> </label>
+<label> 微博是 <%= f.text_field :weibo %> </label>
+<label> 。 </label>
+<%= submit_tag "submit" %>
+<% end %>
+</div>
+
+<div id="customer_list">
+<%= render :partial => 'list'%>
+</div>

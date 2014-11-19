@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DBiz</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="header">
+  <%= link_to 'Home', controller: 'welcome' %>
+  <%= link_to 'Materials', controller: 'materials' %>
+  <%= link_to 'Productions', controller: 'productions' %>
+  <%= link_to 'Orders', controller: 'orders' %>
+  <%= link_to 'Customers', controller: 'customers' %>
+</div>
+
+<%= yield %>
+
+</body>
+</html>

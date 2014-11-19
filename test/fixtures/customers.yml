@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when_joined: 2014-11-17
+  nick: MyString
+  address: MyString
+  tel: MyString
+  email: MyString
+  wechat: MyString
+  weibo: MyString
+
+two:
+  when_joined: 2014-11-17
+  nick: MyString
+  address: MyString
+  tel: MyString
+  email: MyString
+  wechat: MyString
+  weibo: MyString

@@ -1,0 +1,29 @@
+<% unless @orders.empty? %>
+
+  <table id="order_list" >
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Sum</th>
+      <th>Price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.when %></td>
+      <td><%= Customer.find(order.who_id).address %> (<%= Customer.find(order.who_id).tel %>) </td>
+      <td><%= order.sum %></td>
+      <td><%= link_to "Details", {:controller=>"orderdetails", :action=>"index",:id=>order, :class=>"order_details"} %></td>
+      <td><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>order}, :class=>"delete"%></td>
+      <td>Edit</td>
+    </tr>
+  <% end %>
+
+  </table>
+
+<% end %>
+
+
