@@ -1,15 +1,25 @@
-<h1>Listing orderdetails</h1>
+<h1>订单详情</h1>
 
-<div id="create_new_orderdetail">
+<div id="orderdetail_list">
+<%= render :partial => 'list'%>
+</div>
+
+<div class="padding" ></div>
+
+<div id="orderdetail_sum">
+<label>点击<a id="add_new_orderdetail" href="#">这里</a>增加新订单明细。</label>
+</div>
+
+<div class="padding" ></div>
+
+<div id="create_new_orderdetail" hidden="true">
 <%= form_for :orderdetail, :html=>{:id=>"create-orderdetail"} do |f| %>
 <label> 在本订单<%= f.hidden_field :order_id, :value => @order_id %>中，包含 <%= f.select :product_id, @products %> </label>
 <label> 共 <%= f.text_field :number %> </label>
 <label> 斤（单价 <%= f.text_field :price %> </label>
 <label> ，折扣 <%= f.text_field :discount %> ） </label>
-<%= submit_tag "submit" %>
+<%= submit_tag "submit", class: "closeWin" %>
+<%= link_to "取消", "#", class: "closeWin" %>
 <% end %>
 </div>
 
-<div id="order_list">
-<%= render :partial => 'list'%>
-</div>

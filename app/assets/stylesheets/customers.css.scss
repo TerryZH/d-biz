@@ -1,3 +1,23 @@
 // Place all the styles related to the customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#customer_list {
+  $tab_width:500px;
+  $col_width:auto;
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+    }
+  }
+}
+
+#create_new_customer {
+  font-size:12px;
+  input {width:80px; }
+  float:left
+}
+
+#customer_sum {
+font-size:12px;
+}

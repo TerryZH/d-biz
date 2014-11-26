@@ -2,4 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
+$ ->
+  $('#add_new_material').click ->
+    $('#create_new_material').dialog('open', 'material_list');

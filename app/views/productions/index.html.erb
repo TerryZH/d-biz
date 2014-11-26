@@ -1,16 +1,26 @@
-<h1>Listing productions</h1>
-
-<div id="create_new_production">
-<%= form_for :production, :html=>{:id=>"create-production"} do |f| %>
-<label> 在 <%= f.date_field :when %> </label>
-<label> 这一天，工人 <%= f.select :who_id, @workers %> </label>
-<label> 包了 <%= f.text_field :number %> </label>
-<label> 斤 <%= f.select :what_id, @products %> </label>
-<label> 。 </label>
-<%= submit_tag "submit" %>
-<% end %>
-</div>
+<h1>生产</h1>
 
 <div id="production_list">
 <%= render :partial => 'list'%>
 </div>
+
+<div class="padding" ></div>
+
+<div id="production_sum">
+<label>点击<a id="add_new_production" href="#">这里</a>增加新生产记录。</label>
+</div>
+
+<div class="padding" ></div>
+
+<div id="create_new_production" hidden="true">
+<%= form_for :production, :html=>{:id=>"create-production"} do |f| %>
+<label> 在 <%= f.date_field :when, :value => Date.today %> </label>
+<label> 这一天，工人 <%= f.select :who_id, @workers %> </label>
+<label> 包了 <%= f.text_field :number %> </label>
+<label> 斤 <%= f.select :what_id, @products %> </label>
+<label> 。 </label>
+<%= submit_tag "submit", class: "closeWin" %>
+<%= link_to "取消", "#", class: "closeWin" %>
+<% end %>
+</div>
+

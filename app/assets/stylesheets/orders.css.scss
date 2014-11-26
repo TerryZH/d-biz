@@ -1,3 +1,22 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#order_list {
+  $tab_width:600px;
+  $col_width:auto;
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+    }
+  }
+}
+
+#create_new_order {
+font-size:12px;
+input {width:80px; }
+}
+
+#order_sum {
+font-size:12px;
+}

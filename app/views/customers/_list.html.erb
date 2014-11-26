@@ -1,31 +1,30 @@
 <% unless @customers.empty? %>
 
-  <table id="customer_list" >
-    <tr>
-      <th>Date</th>
-      <th>Name</th>
-      <th>Sum</th>
-      <th>Price</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+    <ul class="th">
+      <li>Date</li>
+      <li>Name</li>
+      <li>Sum</li>
+      <li>Price</li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
 
   <% @customers.each do |customer| %>
-    <tr>
-      <td><%= customer.when_joined %></td>
-      <td><%= customer.nick %></td>
-      <td><%= customer.address %></td>
-      <td><%= customer.tel %></td>
-      <td><%= customer.email %></td>
-      <td><%= customer.wechat %></td>
-      <td><%= customer.weibo %></td>
-      <td><%= link_to "Delete", {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></td>
-      <td>Edit</td>
-    </tr>
+    <ul>
+      <li><%= customer.when_joined %></li>
+      <li><%= customer.nick %></li>
+      <li><%= customer.address %></li>
+      <li><%= customer.tel %></li>
+      <li><%= customer.email %></li>
+      <li><%= customer.wechat %></li>
+      <li><%= customer.weibo %></li>
+      <li><%= link_to "Delete", {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></li>
+      <li>Edit</li>
+    </ul>
   <% end %>
 
-  </table>
+  <%= paginate @customers %>
 
 <% end %>
 

@@ -48,9 +48,6 @@ Rails.application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-  resources :orders do
-    resources :orderdetails
-  end
   
   # Example resource route with sub-resources:
   #   resources :products do

@@ -1,16 +1,33 @@
-<h1>Listing materials</h1>
-
-<div id="create_new_material">
-<%= form_for :material, :html=>{:id=>"create-material"} do |f| %>
-    <label> 在 <%= f.date_field :when %> </label>
-    <label> 这一天，买了 <%= f.text_field :what %> </label>
-    <label> 。共花费 <%= f.text_field :sum %> </label>
-    <label> 元，单价 <%= f.text_field :price %> </label>
-    <label> 元。 </label>
-    <%= submit_tag "submit" %>
-  <% end %>
-</div>
+<h1>进货</h1>
 
 <div id="material_list">
   <%= render :partial => 'list'%>
 </div>
+
+<div class="padding" ></div>
+
+<div id="material_sum">
+  <label><%= @summary %></label>
+</div>
+
+<div class="padding" ></div>
+
+<div>
+  <div class="add_new" id="add_new_material"><%= I18n.t 'views.materials.index.add_new' %></div>
+</div>
+
+<div class="padding" ></div>
+
+<div id="create_new_material" hidden="true">
+<%= form_for :material, :html=>{:id=>"create-material"} do |f| %>
+<ul>
+  <li> <%= f.date_field :when, :value => Date.today %> </li>
+  <li> <%= f.text_field :what %> </li>
+  <li> <%= f.text_field :sum %> </li>
+  <li> <%= f.text_field :price %> </li>
+  <li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+  <li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+</ul>
+<% end %>
+</div>
+

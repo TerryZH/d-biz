@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
     def index
-        @orders = Order.all
+        @orders = Order.all.page(params[:page]).per(5)
         @customers = Customer.all.collect {|c| [ c.address, c.id ] }
+        @count = Order.all.count
+        @sum = Order.sum("sum")
     end
     
     def create

@@ -10,6 +10,23 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ * require_tree .
  *= require_self
  */
+
+ul{ list-style:none; padding:0px; margin:0px; height:20px; line-height:20px;
+    border:1px solid #99CC00; border-top:0px; font-size:12px; }
+
+ul li{ display:block; float:left; text-indent:2em; }
+
+.th{ background:#F1FADE; font-weight:bold; border-top:1px solid #99CC00; }
+
+.padding {height:12px;}
+
+.pagination {font-size:12px;}
+
+.popWarp {left:0px; top:0px; float:left; position:absolute; background:black; filter:alpha(opacity:30); opacity:0.3}
+
+.popDiv {float:left; position:absolute; background:white}
+
+.add_new { border:1px solid #99CC00; background:#F1FADE; font-weight:bold; width:180px; height:30px; font-size:18px; text-align:center; line-height:30px;}

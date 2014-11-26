@@ -1,2 +1,17 @@
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
+<p>
+<label>available locale --- <%= I18n.available_locales %></label>
+</p>
+<p>
+<label>default locale --- <%= I18n.default_locale %></label>
+</p>
+<p>
+<label>target locale --- <%= params[:locale] %></label>
+</p>
+<p>
+<label>decision --- <%= params[:locale] && (I18n.available_locales.include? params[:locale].to_sym) %></label>
+</p>
+<p>
+<label>current locale --- <%= I18n.locale %></label>
+</p>

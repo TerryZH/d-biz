@@ -1,15 +1,25 @@
-<h1>Listing orders</h1>
-
-<div id="create_new_order">
-<%= form_for :order, :html=>{:id=>"create-order"} do |f| %>
-<label> 在 <%= f.date_field :when %> </label>
-<label> 这一天，顾客 <%= f.select :who_id, @customers %> </label>
-<label> 买了 <%= f.text_field :sum %> </label>
-<label> 元的产品。 </label>
-<%= submit_tag "submit" %>
-<% end %>
-</div>
+<h1>订单</h1>
 
 <div id="order_list">
 <%= render :partial => 'list'%>
 </div>
+
+<div class="padding" ></div>
+
+<div id="order_sum">
+<label>共完成<%=@count%>次订单，收入<%=@sum%>元。点击<a id="add_new_order" href="#">这里</a>增加新订单。</label>
+</div>
+
+<div class="padding" ></div>
+
+<div id="create_new_order" hidden="true">
+<%= form_for :order, :html=>{:id=>"create-order"} do |f| %>
+<label> 在 <%= f.date_field :when, :value => Date.today %> </label>
+<label> 这一天，顾客 <%= f.select :who_id, @customers %> </label>
+<label> 买了 <%= f.text_field :sum %> </label>
+<label> 元的产品。 </label>
+<%= submit_tag "submit", class: "closeWin" %>
+<%= link_to "取消", "#", class: "closeWin" %>
+<% end %>
+</div>
+

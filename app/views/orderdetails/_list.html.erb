@@ -1,29 +1,26 @@
 <% unless @orderdetails.empty? %>
 
-  <table id="orderdetail_list" >
-    <tr>
-      <th>Date</th>
-      <th>Name</th>
-      <th>Sum</th>
-      <th>Price</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+    <ul class="th">
+      <li>Date</li>
+      <li>Name</li>
+      <li>Sum</li>
+      <li>Price</li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
 
   <% @orderdetails.each do |orderdetail| %>
-    <tr>
-      <td><%= orderdetail.order_id %></td>
-      <td><%= Product.find(orderdetail.product_id).name %> </td>
-      <td><%= orderdetail.number %></td>
-      <td><%= orderdetail.price %></td>
-      <td><%= orderdetail.discount %></td>
-      <td><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>orderdetail}, :class=>"delete"%></td>
-      <td>Edit</td>
-    </tr>
+    <ul>
+      <li><%= orderdetail.order_id %></li>
+      <li><%= Product.find(orderdetail.product_id).name %> </li>
+      <li><%= orderdetail.number %></li>
+      <li><%= orderdetail.price %></li>
+      <li><%= orderdetail.discount %></li>
+      <li><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>orderdetail}, :class=>"delete"%></li>
+      <li>Edit</li>
+    </ul>
   <% end %>
-
-  </table>
 
 <% end %>
 

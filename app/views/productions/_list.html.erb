@@ -1,28 +1,27 @@
 <% unless @productions.empty? %>
 
-  <table id="production_list" >
-    <tr>
-      <th>Date</th>
-      <th>Name</th>
-      <th>Sum</th>
-      <th>Price</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+    <ul class="th">
+      <li>Date</li>
+      <li>Name</li>
+      <li>Sum</li>
+      <li>Price</li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
 
   <% @productions.each do |production| %>
-    <tr>
-      <td><%= production.when %></td>
-      <td><%= Worker.find(production.who_id).name %></td>
-      <td><%= Product.find(production.what_id).name %></td>
-      <td><%= production.number %></td>
-      <td><%= link_to "Delete", {:controller=>"productions", :action=>"delete",:id=>production}, :class=>"delete"%></td>
-      <td>Edit</td>
-    </tr>
+    <ul>
+      <li><%= production.when %></li>
+      <li><%= Worker.find(production.who_id).name %></li>
+      <li><%= Product.find(production.what_id).name %></li>
+      <li><%= production.number %></li>
+      <li><%= link_to "Delete", {:controller=>"productions", :action=>"delete",:id=>production}, :class=>"delete"%></li>
+      <li>Edit</li>
+    </ul>
   <% end %>
 
-  </table>
+  <%= paginate @productions %>
 
 <% end %>
 

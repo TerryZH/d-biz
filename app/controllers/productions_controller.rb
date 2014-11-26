@@ -1,6 +1,6 @@
 class ProductionsController < ApplicationController
   def index
-    @productions = Production.all
+    @productions = Production.all.page(params[:page]).per(5)
     @workers = Worker.all.collect {|w| [ w.name, w.id ] }
     @products = Product.all.collect {|p| [ p.name, p.id ] }
   end

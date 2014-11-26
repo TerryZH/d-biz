@@ -1,28 +1,26 @@
 <% unless @materials.empty? %>
 
-  <table id="material_list" >
-    <tr>
-      <th>Date</th>
-      <th>Name</th>
-      <th>Sum</th>
-      <th>Price</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+    <ul class="th">
+      <li><%= I18n.t 'views.materials.index.when' %></li>
+      <li><%= I18n.t 'views.materials.index.what' %></li>
+      <li><%= I18n.t 'views.materials.index.sum' %></li>
+      <li><%= I18n.t 'views.materials.index.price' %></li>
+      <li></li>
+      <li></li>
+    </ul>
 
   <% @materials.each do |material| %>
-    <tr>
-      <td><%= material.when %></td>
-      <td><%= material.what %></td>
-      <td><%= material.sum %></td>
-      <td><%= material.price %></td>
-      <td><%= link_to "Delete", {:controller=>"materials", :action=>"delete",:id=>material}, :class=>"delete"%></td>
-      <td>Edit</td>
-    </tr>
+    <ul>
+      <li><%= material.when %></li>
+      <li><%= material.what %></li>
+      <li><%= material.sum %></li>
+      <li><%= material.price %></li>
+      <li><%= link_to "Delete", {:controller=>"materials", :action=>"delete",:id=>material}, :class=>"delete"%></li>
+      <li>Edit</li>
+    </ul>
   <% end %>
 
-  </table>
+  <%= paginate @materials %>
 
 <% end %>
 
