@@ -1,11 +1,9 @@
 <% unless @orders.empty? %>
 
     <ul class="th">
-      <li>Date</li>
-      <li>Name</li>
-      <li>Sum</li>
-      <li>Price</li>
-      <li></li>
+      <li><%= I18n.t 'views.orders.index.when' %></li>
+      <li><%= I18n.t 'views.orders.index.who' %></li>
+      <li><%= I18n.t 'views.orders.index.sum' %></li>
       <li></li>
       <li></li>
     </ul>
@@ -15,7 +13,7 @@
       <li><%= order.when %></li>
       <li><%= Customer.find(order.who_id).address %> (<%= Customer.find(order.who_id).tel %>) </li>
       <li><%= order.sum %></li>
-      <li><%= link_to "Details", {:controller=>"orderdetails", :action=>"index",:id=>order, :class=>"order_details"} %></li>
+      <li><%= link_to "Details", {:controller=>"orderdetails", :action=>"index",:id=>order} %></li>
       <li><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>order}, :class=>"delete"%></li>
       <li>Edit</li>
     </ul>

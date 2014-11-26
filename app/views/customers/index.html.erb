@@ -1,29 +1,36 @@
 <h1>客户</h1>
 
 <div id="customer_list">
-<%= render :partial => 'list'%>
+  <%= render :partial => 'list'%>
 </div>
 
 <div class="padding" ></div>
 
 <div id="customer_sum">
-<label>共积累<%=@count%>位客户。点击<a id="add_new_customer" href="#">这里</a>增加新客户。</label>
+  <label><%=@summary%></label>
+</div>
+
+<div class="padding" ></div>
+
+<div>
+  <div class="add_new" id="add_new_customer"><%= I18n.t 'views.customers.index.add_new' %></div>
 </div>
 
 <div class="padding" ></div>
 
 <div id="create_new_customer" hidden="true">
 <%= form_for :customer, :html=>{:id=>"create-customer"} do |f| %>
-<label> 在 <%= f.date_field :when_joined, :value => Date.today %> </label>
-<label> 这一天，客户 <%= f.text_field :nick %> </label>
-<label> 订购第一单。他／她住在 <%= f.text_field :address %> </label>
-<label> 电话是 <%= f.text_field :tel %> </label>
-<label> 电邮是 <%= f.text_field :email %> </label>
-<label> 微信是 <%= f.text_field :wechat %> </label>
-<label> 微博是 <%= f.text_field :weibo %> </label>
-<label> 。 </label>
-<%= submit_tag "提交", class: "closeWin" %>
-<%= link_to "取消", "#", class: "closeWin" %>
+<ul>
+<li> <%= f.date_field :when_joined, :value => Date.today %> </li>
+<li> <%= f.text_field :nick %> </li>
+<li> <%= f.text_field :address %> </li>
+<li> <%= f.text_field :tel %> </li>
+<li> <%= f.text_field :email %> </li>
+<li> <%= f.text_field :wechat %> </li>
+<li> <%= f.text_field :weibo %> </li>
+<li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+<li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+</ul>
 <% end %>
 </div>
 

@@ -2,8 +2,7 @@ class OrdersController < ApplicationController
     def index
         @orders = Order.all.page(params[:page]).per(5)
         @customers = Customer.all.collect {|c| [ c.address, c.id ] }
-        @count = Order.all.count
-        @sum = Order.sum("sum")
+        @summary = (I18n.t 'views.orders.index.summary') % {:count=>Order.all.count, :sum=>Order.sum("sum")}
     end
     
     def create

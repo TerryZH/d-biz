@@ -3,6 +3,7 @@ class ProductionsController < ApplicationController
     @productions = Production.all.page(params[:page]).per(5)
     @workers = Worker.all.collect {|w| [ w.name, w.id ] }
     @products = Product.all.collect {|p| [ p.name, p.id ] }
+    @summary = (I18n.t 'views.productions.index.summary') % {:count=>Production.all.count, :sum=>Production.sum("number")}
   end
 
   def create

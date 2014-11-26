@@ -1,25 +1,34 @@
 <h1>订单详情</h1>
 
 <div id="orderdetail_list">
-<%= render :partial => 'list'%>
+  <%= render :partial => 'list'%>
 </div>
 
 <div class="padding" ></div>
 
 <div id="orderdetail_sum">
-<label>点击<a id="add_new_orderdetail" href="#">这里</a>增加新订单明细。</label>
+  <label><%= @summary %></label>
+</div>
+
+<div class="padding" ></div>
+
+<div>
+  <div class="add_new" id="add_new_orderdetail"><%= I18n.t 'views.orderdetails.index.add_new' %></div>
 </div>
 
 <div class="padding" ></div>
 
 <div id="create_new_orderdetail" hidden="true">
 <%= form_for :orderdetail, :html=>{:id=>"create-orderdetail"} do |f| %>
-<label> 在本订单<%= f.hidden_field :order_id, :value => @order_id %>中，包含 <%= f.select :product_id, @products %> </label>
-<label> 共 <%= f.text_field :number %> </label>
-<label> 斤（单价 <%= f.text_field :price %> </label>
-<label> ，折扣 <%= f.text_field :discount %> ） </label>
-<%= submit_tag "submit", class: "closeWin" %>
-<%= link_to "取消", "#", class: "closeWin" %>
+<ul>
+<li> <%= f.hidden_field :order_id, :value => @order_id %> <label><%=@order_id%></label> </li>
+<li> <%= f.select :product_id, @products %> </li>
+<li> <%= f.text_field :number %> </li>
+<li> <%= f.text_field :price %> </li>
+<li> <%= f.text_field :discount %> </li>
+<li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+<li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+</ul>
 <% end %>
 </div>
 

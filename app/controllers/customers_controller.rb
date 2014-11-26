@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
     def index
         @customers = Customer.all.page(params[:page]).per(5)
-        @count = Customer.all.count
+        @summary = (I18n.t 'views.customers.index.summary') % {:count=>Customer.all.count}
     end
     
     def create

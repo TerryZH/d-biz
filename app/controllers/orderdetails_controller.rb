@@ -4,6 +4,9 @@ class OrderdetailsController < ApplicationController
           @order_id = params[:id]
           @orderdetails = Orderdetail.where(:order_id => params[:id])
           @products = Product.all.collect {|p| [ p.name, p.id ] }
+          sum = 0
+          @orderdetails.each {|od| sum+=od.price*od.number-od.discount}
+          @summary = (I18n.t 'views.orderdetails.index.summary') % {:count=>@orderdetails.count, :sum=>sum}
         else
           redirect_to :controller => 'orders', :action => 'index'
         end

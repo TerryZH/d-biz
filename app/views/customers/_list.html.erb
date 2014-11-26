@@ -1,11 +1,13 @@
 <% unless @customers.empty? %>
 
     <ul class="th">
-      <li>Date</li>
-      <li>Name</li>
-      <li>Sum</li>
-      <li>Price</li>
-      <li></li>
+      <li><%= I18n.t 'views.customers.index.when' %></li>
+      <li><%= I18n.t 'views.customers.index.nick' %></li>
+      <li><%= I18n.t 'views.customers.index.address' %></li>
+      <li><%= I18n.t 'views.customers.index.tel' %></li>
+      <li><%= I18n.t 'views.customers.index.email' %></li>
+      <li><%= I18n.t 'views.customers.index.wechat' %></li>
+      <li><%= I18n.t 'views.customers.index.weibo' %></li>
       <li></li>
       <li></li>
     </ul>
