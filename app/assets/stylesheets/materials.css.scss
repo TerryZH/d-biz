@@ -1,22 +1,14 @@
 // Place all the styles related to the Materials controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 $tab_width:600px;
 $col_width:16%;
-#material_list {
-  ul {
-    width:$tab_width;
-    li {
-      width:$col_width;
-    }
-  }
-}
 
-#create_new_material {
+#material_list, #create_new_material {
   ul {
     width:$tab_width;
     li {
-      text-indent:0.5em;
       width:$col_width;
     }
   }
