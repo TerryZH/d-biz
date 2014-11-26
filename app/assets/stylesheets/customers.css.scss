@@ -1,9 +1,9 @@
 // Place all the styles related to the customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$tab_width:500px;
+$col_width:auto;
 #customer_list {
-  $tab_width:500px;
-  $col_width:auto;
   ul {
     width:$tab_width;
     li {
@@ -16,13 +16,8 @@
   ul {
     width:$tab_width;
     li {
-      text-indent:0em;
+      text-indent:0.5em;
       width:$col_width;
-      input {
-        width:90%;
-        height:95%;
-        border:0px;
-      }
     }
   }
 }
