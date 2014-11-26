@@ -16,13 +16,12 @@
 // require_tree .
 
 (function($){
-/*弹出窗口插件*/
   $.fn.dialog=function(flag,options){
     var opts = $.extend({}, $.fn.dialog.options, options);
-    var popDiv = this;
     var closePopup = function(){
       popDiv.hide();
       $("."+opts.popWarp).remove();
+      $("."+opts.newRow).remove();
       try{
         if (objfocus) {
           objfocus.focus();
@@ -30,37 +29,39 @@
       }catch (e){
       }
     };
+    var redraw = function(){
+      var maxH = $(document).height()+"px";
+      var maxW = $(window).width()+"px";
+      var winH = $("#"+opts.parent_id+" .th").height()+2+"px";
+      var winW = $("#"+opts.parent_id+" .th").width()+2+"px";
+      var winX = $("."+opts.newRow).position().left + "px";
+      var winY = $("."+opts.newRow).position().top + "px";
+      popWarp.css({width:maxW,height:maxH,"z-index":opts.zindex});
+      popDiv.css({left:winX,top:winY,width:winW,height:winH,"z-index":(opts.zindex+2)});
+      newRow.css({width:winW,height:winH,"z-index":(opts.zindex+1)});
+    }
 
     if(flag=="close" && popDiv.is(":visible")){
       closePopup();
       return;
     }
  
-    var maxH = $(document).height()+"px";
-    var maxW = $(window).width()+"px";
-    var winX = ($(window).width()- popDiv.width())/2 + "px";
-    var winY = ($(window).height()- popDiv.height())/2 + $(window).scrollTop() + "px";
     var popWarp=$("<div/>").addClass(opts.popWarp);
-
+    var newRow=$("<div/>").addClass(opts.newRow);
+    var popDiv = this;
     popDiv.addClass(opts.popDiv);
  
     if(flag=="open" && popDiv.is(":hidden")){
+      $("#"+opts.parent_id+" nav").before(newRow);
       popDiv.after(popWarp);
-      popWarp.css({width:maxW,height:maxH,"z-index":opts.zindex});
-      popDiv.css({left:winX,top:winY,"z-index":(opts.zindex+1)});
+      redraw();
       popDiv.show();
     }
-    $(window).resize(function(){
-                     var maxH = $(document).height()+"px";
-                     var maxW = $(window).width()+"px";
-                     var winX = ($(window).width()- popDiv.width())/2 + "px";
-                     var winY = ($(window).height()- popDiv.height())/2 + $(window).scrollTop() + "px";
-                     popDiv.css({left:winX,top:winY});
-                     popWarp.css({width:maxW,height:maxH});
-                     });
-
+ 
+    $(window).resize(redraw);
     $("."+opts.closeWin).click(closePopup);
     $("."+opts.popWarp).click(closePopup);
+ 
     var con={
             scrol:function(kg){
                   if(kg!="off"){
@@ -78,7 +79,7 @@
     return con;
   };
  
-  $.fn.dialog.options={closeWin:"closeWin", popWarp:"popWarp", popDiv:"popDiv", zindex:999 };
+  $.fn.dialog.options={closeWin:"closeWin", popWarp:"popWarp", popDiv:"popDiv", newRow:"newRow", zindex:999 };
 
 })(jQuery);
 

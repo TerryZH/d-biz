@@ -13,11 +13,20 @@
 }
 
 #create_new_customer {
-  font-size:12px;
-  input {width:80px; }
-  float:left
+  ul {
+    width:$tab_width;
+    li {
+      text-indent:0em;
+      width:$col_width;
+      input {
+        width:90%;
+        height:95%;
+        border:0px;
+      }
+    }
+  }
 }
 
 #customer_sum {
-font-size:12px;
+  font-size:12px;
 }

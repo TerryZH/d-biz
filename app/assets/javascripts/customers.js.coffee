@@ -4,4 +4,4 @@
 
 $ ->
   $('#add_new_customer').click ->
-    $('#create_new_customer').dialog('open');
+    $('#create_new_customer').dialog('open', {parent_id:'customer_list'});

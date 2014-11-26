@@ -4,4 +4,4 @@
 
 $ ->
   $('#add_new_material').click ->
-    $('#create_new_material').dialog('open', 'material_list');
+    $('#create_new_material').dialog('open', {parent_id:'material_list'});

@@ -4,4 +4,4 @@
 
 $ ->
   $('#add_new_orderdetail').click ->
-    $('#create_new_orderdetail').dialog('open');
+    $('#create_new_orderdetail').dialog('open', {parent_id:'orderdetail_list'});

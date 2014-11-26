@@ -4,4 +4,4 @@
 
 $ ->
   $('#add_new_production').click ->
-    $('#create_new_production').dialog('open');
+    $('#create_new_production').dialog('open', {parent_id:'production_list'});
