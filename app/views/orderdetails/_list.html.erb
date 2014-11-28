@@ -1,14 +1,14 @@
-<% unless @orderdetails.empty? %>
+<ul class="th">
+  <li><%= I18n.t 'views.orderdetails.index.order_id' %></li>
+  <li><%= I18n.t 'views.orderdetails.index.product' %></li>
+  <li><%= I18n.t 'views.orderdetails.index.number' %></li>
+  <li><%= I18n.t 'views.orderdetails.index.price' %></li>
+  <li><%= I18n.t 'views.orderdetails.index.discount' %></li>
+  <li></li>
+  <li></li>
+</ul>
 
-    <ul class="th">
-      <li><%= I18n.t 'views.orderdetails.index.order_id' %></li>
-      <li><%= I18n.t 'views.orderdetails.index.product' %></li>
-      <li><%= I18n.t 'views.orderdetails.index.number' %></li>
-      <li><%= I18n.t 'views.orderdetails.index.price' %></li>
-      <li><%= I18n.t 'views.orderdetails.index.discount' %></li>
-      <li></li>
-      <li></li>
-    </ul>
+<% unless @orderdetails.empty? %>
 
   <% @orderdetails.each do |orderdetail| %>
     <ul>
@@ -22,8 +22,8 @@
     </ul>
   <% end %>
 
-  <nav class="pagination" hidden="true" />
-
 <% end %>
+
+<nav class="pagination" hidden="true" />
 
 

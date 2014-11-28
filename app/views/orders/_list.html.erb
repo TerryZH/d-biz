@@ -1,12 +1,12 @@
-<% unless @orders.empty? %>
+<ul class="th">
+  <li><%= I18n.t 'views.orders.index.when' %></li>
+  <li><%= I18n.t 'views.orders.index.who' %></li>
+  <li><%= I18n.t 'views.orders.index.sum' %></li>
+  <li></li>
+  <li></li>
+</ul>
 
-    <ul class="th">
-      <li><%= I18n.t 'views.orders.index.when' %></li>
-      <li><%= I18n.t 'views.orders.index.who' %></li>
-      <li><%= I18n.t 'views.orders.index.sum' %></li>
-      <li></li>
-      <li></li>
-    </ul>
+<% unless @orders.empty? %>
 
   <% @orders.each do |order| %>
     <ul>
@@ -19,8 +19,8 @@
     </ul>
   <% end %>
 
-  <%= paginate @orders %>
-
 <% end %>
+
+<%= paginate @orders %>
 
 

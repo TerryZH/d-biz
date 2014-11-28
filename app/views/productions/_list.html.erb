@@ -1,13 +1,13 @@
-<% unless @productions.empty? %>
+<ul class="th">
+  <li><%= I18n.t 'views.productions.index.when' %></li>
+  <li><%= I18n.t 'views.productions.index.who' %></li>
+  <li><%= I18n.t 'views.productions.index.what' %></li>
+  <li><%= I18n.t 'views.productions.index.number' %></li>
+  <li></li>
+  <li></li>
+</ul>
 
-    <ul class="th">
-      <li><%= I18n.t 'views.productions.index.when' %></li>
-      <li><%= I18n.t 'views.productions.index.who' %></li>
-      <li><%= I18n.t 'views.productions.index.what' %></li>
-      <li><%= I18n.t 'views.productions.index.number' %></li>
-      <li></li>
-      <li></li>
-    </ul>
+<% unless @productions.empty? %>
 
   <% @productions.each do |production| %>
     <ul>
@@ -20,8 +20,8 @@
     </ul>
   <% end %>
 
-  <%= paginate @productions %>
-
 <% end %>
+
+<%= paginate @productions %>
 
 

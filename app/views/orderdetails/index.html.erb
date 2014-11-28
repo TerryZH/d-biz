@@ -25,7 +25,7 @@
 <li> <%= f.select :product_id, @products %> </li>
 <li> <%= f.text_field :number %> </li>
 <li> <%= f.text_field :price %> </li>
-<li> <%= f.text_field :discount %> </li>
+<li> <%= f.text_field :discount, :value => 0 %> </li>
 <li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
 <li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
 </ul>
