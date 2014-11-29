@@ -1,3 +1,17 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$tab_width:400px;
+$col_width:25%;
+
+#profit_trend {
+font-size:12px;
+ul {
+width:$tab_width;
+li {
+width:$col_width;
+}
+}
+}
+

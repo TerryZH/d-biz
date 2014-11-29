@@ -21,6 +21,14 @@
 
 zh:
   views:
+    welcome:
+      index:
+        overview: "概览"
+        summary: "总计"
+        date: "日期"
+        profit: "毛利"
+        amount: "销售额"
+        profit_rate: "毛利率"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"

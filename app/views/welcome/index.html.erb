@@ -1,5 +1,30 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1><%= I18n.t 'views.welcome.index.overview' %></h1>
+<p></p>
+
+<div id="profit_trend">
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.date' %></li>
+  <li><%= I18n.t 'views.welcome.index.amount' %></li>
+  <li><%= I18n.t 'views.welcome.index.profit' %></li>
+  <li><%= I18n.t 'views.welcome.index.profit_rate' %></li>
+</ul>
+<% @profits.each do |pt| %>
+<ul>
+  <li><%= pt.when %></li>
+  <li><%= pt.amount %></li>
+  <li><%= pt.profit %></li>
+  <li><%= (pt.profit/pt.amount*100).round(2).to_s + " %" %></li>
+</ul>
+<%end%>
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.summary' %></li>
+  <li><%= @amount_total %></li>
+  <li><%= @profit_total %></li>
+  <li><%= (@profit_total/@amount_total*100).round(2).to_s + " %" %></li>
+</ul>
+</div>
+
+<div id="locale_debug" hidden="true">
 <p>
 <label>available locale --- <%= I18n.available_locales %></label>
 </p>
@@ -15,3 +40,4 @@
 <p>
 <label>current locale --- <%= I18n.locale %></label>
 </p>
+</div>

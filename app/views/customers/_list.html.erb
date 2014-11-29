@@ -15,12 +15,12 @@
   <% @customers.each do |customer| %>
     <ul>
       <li><%= customer.when_joined %></li>
-      <li><%= customer.nick %></li>
+      <li><%= customer.nick.empty? ? "(null)" : customer.nick %></li>
       <li><%= customer.address %></li>
       <li><%= customer.tel %></li>
-      <li><%= customer.email %></li>
-      <li><%= customer.wechat %></li>
-      <li><%= customer.weibo %></li>
+      <li><%= customer.email.empty? ? "(null)" : customer.email %></li>
+      <li><%= customer.wechat.empty? ? "(null)" : customer.wechat %></li>
+      <li><%= customer.weibo.empty? ? "(null)" : customer.weibo %></li>
       <li><%= link_to "Delete", {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></li>
       <li>Edit</li>
     </ul>
