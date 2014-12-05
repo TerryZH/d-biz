@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129015818) do
+ActiveRecord::Schema.define(version: 20141205012828) do
 
   create_table "customers", force: true do |t|
     t.date     "when_joined"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20141129015818) do
     t.float    "profit"
     t.float    "amount"
     t.date     "when"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "promotions", force: true do |t|
+    t.date     "when"
+    t.string   "what"
+    t.float    "sum"
+    t.float    "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

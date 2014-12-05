@@ -1,0 +1,31 @@
+<div class="d-table">
+
+<ul class="th">
+  <li><%= I18n.t 'views.promotions.index.when' %></li>
+  <li><%= I18n.t 'views.promotions.index.what' %></li>
+  <li><%= I18n.t 'views.promotions.index.sum' %></li>
+  <li><%= I18n.t 'views.promotions.index.number' %></li>
+  <li></li>
+  <li></li>
+</ul>
+
+<% unless @promotions.empty? %>
+
+  <% @promotions.each do |promotion| %>
+    <ul>
+      <li><%= promotion.when %></li>
+      <li><%= promotion.what %></li>
+      <li><%= promotion.sum %></li>
+      <li><%= promotion.number %></li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"promotions", :action=>"delete",:id=>promotion}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
+    </ul>
+  <% end %>
+
+<% end %>
+
+</div>
+
+<%= paginate @promotions %>
+
+

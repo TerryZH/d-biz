@@ -1,0 +1,33 @@
+<h1><%= I18n.t 'views.promotions.index.title' %></h1>
+
+<div id="promotion_list">
+<%= render :partial => 'list'%>
+</div>
+
+<div class="padding" ></div>
+
+<div id="promotion_sum">
+<label><%= @summary %></label>
+</div>
+
+<div class="padding" ></div>
+
+<div>
+<div class="add_new" id="add_new_promotion"><%= I18n.t 'views.promotions.index.add_new' %></div>
+</div>
+
+<div class="padding" ></div>
+
+<div id="create_new_promotion" hidden="true">
+<%= form_for :promotion, :html=>{:id=>"create-promotion"} do |f| %>
+<ul>
+<li> <%= f.date_field :when, :value => Date.today %> </li>
+<li> <%= f.text_field :what %> </li>
+<li> <%= f.text_field :sum %> </li>
+<li> <%= f.text_field :number %> </li>
+<li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+<li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+</ul>
+<% end %>
+</div>
+

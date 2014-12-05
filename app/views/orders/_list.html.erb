@@ -1,3 +1,5 @@
+<div class="d-table">
+
 <ul class="th">
   <li><%= I18n.t 'views.orders.index.when' %></li>
   <li><%= I18n.t 'views.orders.index.who' %></li>
@@ -13,13 +15,15 @@
       <li><%= order.when %></li>
       <li><%= Customer.find(order.who_id).address %> (<%= Customer.find(order.who_id).tel %>) </li>
       <li><%= order.sum %></li>
-      <li><%= link_to "Details", {:controller=>"orderdetails", :action=>"index",:id=>order} %></li>
-      <li><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>order}, :class=>"delete"%></li>
-      <li>Edit</li>
+      <li><%= link_to I18n.t('views.details'), {:controller=>"orderdetails", :action=>"index",:id=>order} %></li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"orders", :action=>"delete",:id=>order}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>
 
 <% end %>
+
+</div>
 
 <%= paginate @orders %>
 

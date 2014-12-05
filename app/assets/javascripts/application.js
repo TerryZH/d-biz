@@ -46,21 +46,22 @@
       return;
     }
  
-    var popWarp=$("<div/>").addClass(opts.popWarp);
-    var newRow=$("<div/>").addClass(opts.newRow);
     var popDiv = this;
-    popDiv.addClass(opts.popDiv);
- 
     if(flag=="open" && popDiv.is(":hidden")){
-      $("#"+opts.parent_id+" nav").before(newRow);
+      var popWarp=$("<div/>").addClass(opts.popWarp);
+      var newRow=$("<div/>").addClass(opts.newRow);
+ 
+      popDiv.addClass(opts.popDiv);
+      $("#"+opts.parent_id+" .d-table").after(newRow);
       popDiv.after(popWarp);
       redraw();
-      popDiv.show();
-    }
  
-    $(window).resize(redraw);
-    $("."+opts.closeWin).click(closePopup);
-    $("."+opts.popWarp).click(closePopup);
+      $(window).resize(redraw);
+      $("."+opts.closeWin).click(closePopup);
+      $("."+opts.popWarp).click(closePopup);
+ 
+      popDiv.show();
+   }
  
     var con={
             scrol:function(kg){

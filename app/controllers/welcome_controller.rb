@@ -18,7 +18,8 @@ class WelcomeController < ApplicationController
             3 => 0.62,
             4 => 0.58,
             5 => 0.57,
-            6 => 0.62
+            6 => 0.62,
+            7 => 0.69,
         };
         
         if Profit.exists?

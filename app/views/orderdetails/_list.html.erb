@@ -1,3 +1,5 @@
+<div class="d-table">
+
 <ul class="th">
   <li><%= I18n.t 'views.orderdetails.index.order_id' %></li>
   <li><%= I18n.t 'views.orderdetails.index.product' %></li>
@@ -17,13 +19,12 @@
       <li><%= orderdetail.number %></li>
       <li><%= orderdetail.price %></li>
       <li><%= orderdetail.discount %></li>
-      <li><%= link_to "Delete", {:controller=>"orders", :action=>"delete",:id=>orderdetail}, :class=>"delete"%></li>
-      <li>Edit</li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"orders", :action=>"delete",:id=>orderdetail}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>
 
 <% end %>
 
-<nav class="pagination" hidden="true" />
-
+</div>
 

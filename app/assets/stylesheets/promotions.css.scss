@@ -1,0 +1,19 @@
+// Place all the styles related to the promotions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$tab_width:600px;
+$col_width:16%;
+
+#promotion_list, #create_new_promotion {
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+    }
+  }
+}
+
+#promotion_sum {
+  font-size:12px;
+}

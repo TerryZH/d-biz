@@ -1,3 +1,5 @@
+<div class="d-table">
+
 <ul class="th">
   <li><%= I18n.t 'views.productions.index.when' %></li>
   <li><%= I18n.t 'views.productions.index.who' %></li>
@@ -15,12 +17,14 @@
       <li><%= Worker.find(production.who_id).name %></li>
       <li><%= Product.find(production.what_id).name %></li>
       <li><%= production.number %></li>
-      <li><%= link_to "Delete", {:controller=>"productions", :action=>"delete",:id=>production}, :class=>"delete"%></li>
-      <li>Edit</li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"productions", :action=>"delete",:id=>production}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>
 
 <% end %>
+
+</div>
 
 <%= paginate @productions %>
 

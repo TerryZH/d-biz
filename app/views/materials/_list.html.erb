@@ -1,3 +1,5 @@
+<div class="d-table">
+
 <ul class="th">
   <li><%= I18n.t 'views.materials.index.when' %></li>
   <li><%= I18n.t 'views.materials.index.what' %></li>
@@ -15,12 +17,14 @@
       <li><%= material.what %></li>
       <li><%= material.sum %></li>
       <li><%= material.price %></li>
-      <li><%= link_to "Delete", {:controller=>"materials", :action=>"delete",:id=>material}, :class=>"delete"%></li>
-      <li>Edit</li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"materials", :action=>"delete",:id=>material}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>
 
 <% end %>
+
+</div>
 
 <%= paginate @materials %>
 

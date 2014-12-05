@@ -1,3 +1,5 @@
+<div class="d-table">
+
 <ul class="th">
   <li><%= I18n.t 'views.customers.index.when' %></li>
   <li><%= I18n.t 'views.customers.index.nick' %></li>
@@ -21,12 +23,14 @@
       <li><%= customer.email.empty? ? "(null)" : customer.email %></li>
       <li><%= customer.wechat.empty? ? "(null)" : customer.wechat %></li>
       <li><%= customer.weibo.empty? ? "(null)" : customer.weibo %></li>
-      <li><%= link_to "Delete", {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></li>
-      <li>Edit</li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>
 
 <% end %>
+
+</div>
 
 <%= paginate @customers %>
 
