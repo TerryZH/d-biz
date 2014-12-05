@@ -1,6 +1,94 @@
 <h1><%= I18n.t 'views.welcome.index.title' %></h1>
 <p></p>
 
+<div class="input">
+
+<%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
+<ul>
+  <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel, :value => 1 %> </li>
+</ul>
+<ul>
+  <li> <%= f.select :neighbourhood, @neighbourhoods %> </li>
+  <li> <%= f.select :district, @districts %> </li>
+  <li> <%= f.select :building, @buildings %> </li>
+</ul>
+<ul>
+  <li> <%= f.select :unit, @units %> </li>
+  <li> <%= f.select :floor, @floors%> </li>
+  <li> <%= f.select :room, @rooms %> </li>
+</ul>
+<ul>
+  <li> <%= f.select :product0, @products %> </li>
+  <li> <%= f.select :number0, @numbers %> </li>
+  <li> <%= f.select :cooked0, @cooked %> </li>
+  <li> <%= f.text_field :discount0, :value => 0 %> </li>
+</ul>
+<ul>
+  <li> <%= f.select :product1, @products %> </li>
+  <li> <%= f.select :number1, @numbers %> </li>
+  <li> <%= f.select :cooked1, @cooked %> </li>
+  <li> <%= f.text_field :discount1, :value => 0 %> </li>
+</ul>
+<ul>
+  <li> <%= f.select :product2, @products %> </li>
+  <li> <%= f.select :number2, @numbers %> </li>
+  <li> <%= f.select :cooked2, @cooked %> </li>
+  <li> <%= f.text_field :discount2, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product3, @products %> </li>
+<li> <%= f.select :number3, @numbers %> </li>
+<li> <%= f.select :cooked3, @cooked %> </li>
+<li> <%= f.text_field :discount3, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product4, @products %> </li>
+<li> <%= f.select :number4, @numbers %> </li>
+<li> <%= f.select :cooked4, @cooked %> </li>
+<li> <%= f.text_field :discount4, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product5, @products %> </li>
+<li> <%= f.select :number5, @numbers %> </li>
+<li> <%= f.select :cooked5, @cooked %> </li>
+<li> <%= f.text_field :discount5, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product6, @products %> </li>
+<li> <%= f.select :number6, @numbers %> </li>
+<li> <%= f.select :cooked6, @cooked %> </li>
+<li> <%= f.text_field :discount6, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product7, @products %> </li>
+<li> <%= f.select :number7, @numbers %> </li>
+<li> <%= f.select :cooked7, @cooked %> </li>
+<li> <%= f.text_field :discount7, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product8, @products %> </li>
+<li> <%= f.select :number8, @numbers %> </li>
+<li> <%= f.select :cooked8, @cooked %> </li>
+<li> <%= f.text_field :discount8, :value => 0 %> </li>
+</ul>
+<ul>
+<li> <%= f.select :product9, @products %> </li>
+<li> <%= f.select :number9, @numbers %> </li>
+<li> <%= f.select :cooked9, @cooked %> </li>
+<li> <%= f.text_field :discount9, :value => 0 %> </li>
+</ul>
+<ul>
+  <li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+  <li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+</ul>
+<% end %>
+
+
+</div>
+
+<div class="h-padding" ></div>
+
+<div class="information">
 <div id="profit_trend">
 <ul class="th" >
   <li><%= I18n.t 'views.welcome.index.date' %></li>
@@ -24,6 +112,34 @@
 </ul>
 </div>
 
+<div class="padding" ></div>
+
+<div id="storage_trend">
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.product' %></li>
+  <li><%= I18n.t 'views.welcome.index.made' %></li>
+  <li><%= I18n.t 'views.welcome.index.sold' %></li>
+  <li><%= I18n.t 'views.welcome.index.left' %></li>
+  <li><%= I18n.t 'views.welcome.index.prio' %></li>
+</ul>
+<% @storages.each do |s| %>
+<ul>
+  <li><%= s[:product] %></li>
+  <li><%= s[:made] %></li>
+  <li><%= s[:sold] %></li>
+  <li><%= s[:left] %></li>
+  <li><%= s[:prio] %></li>
+</ul>
+<%end%>
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.summary' %></li>
+  <li><%= @made_total %></li>
+  <li><%= @sold_total %></li>
+  <li><%= @left_total %></li>
+  <li></li>
+</ul>
+</div>
+
 <div id="locale_debug" hidden="true">
 <p>
 <label>available locale --- <%= I18n.available_locales %></label>
@@ -44,4 +160,5 @@
 
 <div hidden="true">
 <label id="txtPosition"> where am i? </label>
+</div>
 </div>

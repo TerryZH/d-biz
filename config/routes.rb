@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
+  post 'welcome/index' => 'welcome#create_new_order'
 
   get 'customers/index'
   get 'customers/delete'

@@ -29,6 +29,12 @@ zh:
         profit: "毛利"
         amount: "销售额"
         profit_rate: "毛利率"
+        product: "产品"
+        made: "已生产"
+        sold: "已出售"
+        left: "剩余库存"
+        prio: "去化指标"
+        tel: "订餐电话："
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"

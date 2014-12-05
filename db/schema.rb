@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205012828) do
+ActiveRecord::Schema.define(version: 20141205085818) do
 
   create_table "customers", force: true do |t|
     t.date     "when_joined"

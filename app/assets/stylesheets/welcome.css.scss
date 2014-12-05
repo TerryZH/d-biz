@@ -6,12 +6,29 @@ $tab_width:400px;
 $col_width:25%;
 
 #profit_trend {
-font-size:12px;
-ul {
-width:$tab_width;
-li {
-width:$col_width;
-}
-}
+  font-size:12px;
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+    }
+  }
 }
 
+$tab_width:500px;
+$col_width:20%;
+
+#storage_trend {
+  font-size:12px;
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+    }
+  }
+}
+
+#create-new-order {
+  ul li {height:18px;}
+  input {width:90px;}
+}
