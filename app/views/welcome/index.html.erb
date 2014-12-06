@@ -4,8 +4,8 @@
 <div class="input">
 
 <%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
-<ul>
-  <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel, :value => 1 %> </li>
+<ul class="th">
+  <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
 </ul>
 <ul>
   <li> <%= f.select :neighbourhood, @neighbourhoods %> </li>
@@ -16,6 +16,8 @@
   <li> <%= f.select :unit, @units %> </li>
   <li> <%= f.select :floor, @floors%> </li>
   <li> <%= f.select :room, @rooms %> </li>
+</ul>
+<ul>
 </ul>
 <ul>
   <li> <%= f.select :product0, @products %> </li>
@@ -83,6 +85,17 @@
 </ul>
 <% end %>
 
+<div class="padding" ></div>
+
+<div>
+<%= render :partial => 'orderdetails/list'%>
+</div>
+
+<div class="padding" ></div>
+
+<div>
+<label><%= @lastorder %></label>
+</div>
 
 </div>
 
@@ -110,6 +123,7 @@
   <li><%= @profit_total %></li>
   <li><%= (@profit_total/@amount_total*100).round(2).to_s + " %" %></li>
 </ul>
+<%= paginate @profits %>
 </div>
 
 <div class="padding" ></div>
@@ -139,6 +153,14 @@
   <li></li>
 </ul>
 </div>
+
+<div class="padding" ></div>
+
+<div>
+<%= @iocomp %>
+</div>
+
+<div class="padding" ></div>
 
 <div id="locale_debug" hidden="true">
 <p>

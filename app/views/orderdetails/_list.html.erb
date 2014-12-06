@@ -16,7 +16,7 @@
     <ul>
       <li><%= orderdetail.order_id %></li>
       <li><%= Product.find(orderdetail.product_id).name %> </li>
-      <li><%= orderdetail.number %></li>
+      <li><%= (orderdetail.number*50).round(2) %></li>
       <li><%= orderdetail.price %></li>
       <li><%= orderdetail.discount %></li>
       <li><%= link_to I18n.t('views.delete'), {:controller=>"orders", :action=>"delete",:id=>orderdetail}, :class=>"delete"%></li>

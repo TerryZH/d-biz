@@ -35,6 +35,8 @@ zh:
         left: "剩余库存"
         prio: "去化指标"
         tel: "订餐电话："
+        lastorder: "最近一个订单总金额%{price}，送到%{address}。"
+        iocomp: "投入资金%{input}元（物料%{input_m}元＋促销%{input_p}元），回收资金%{output}元。"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"
@@ -74,7 +76,7 @@ zh:
         add_new: "增加新的订单明细"
         order_id: "订单号"
         product: "产品"
-        number: "数量（斤）"
+        number: "数量（个）"
         price: "单价"
         discount: "折扣"
     customers:

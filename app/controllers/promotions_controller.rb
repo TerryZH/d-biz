@@ -1,6 +1,6 @@
 class PromotionsController < ApplicationController
     def index
-        @promotions = Promotion.all.page(params[:page]).per(5)
+        @promotions = Promotion.all.order('created_at DESC').page(params[:page]).per(5)
         @summary = (I18n.t 'views.promotions.index.summary') % {:count=>Promotion.all.count, :sum=>Promotion.sum("sum")}
     end
     

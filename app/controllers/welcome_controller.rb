@@ -2,23 +2,30 @@ class WelcomeController < ApplicationController
     def index
         @profit_total=0
         @amount_total=0
-        @profits = get_profit_history
-        @profits.each do |p|
+        refresh_profit_history
+        Profit.all.each do |p|
             @profit_total+=p.profit
             @amount_total+=p.amount
         end
         @profit_total = @profit_total.round(2)
         @amount_total = @amount_total.round(2)
-        
+        @profits = Profit.all.order('created_at DESC').page(params[:page]).per(5)
+
         @storages = get_storage
         @made_total = Production.sum("number").round(2)
         @sold_total = Orderdetail.sum("number").round(2)
         @left_total = (@made_total-@sold_total).round(2)
         
         prepare_lists
+        
+        o = Order.last
+        @orderdetails = Orderdetail.where(:order_id => o.id)
+        @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :address=>Customer.find_by_id(o.who_id).address}
+        @iocomp = (I18n.t 'views.welcome.index.iocomp') % {:input=>(Promotion.sum("sum")+Material.sum("sum")).round(2), :input_p=>Promotion.sum("sum").round(2), :input_m=>Material.sum("sum").round(2), :output=>Order.sum("sum").round(2)}
+
     end
     
-    def get_profit_history
+    def refresh_profit_history
         profit_rate = {
             1 => 0.68,
             2 => 0.71,
@@ -54,11 +61,10 @@ class WelcomeController < ApplicationController
             end
             today += 1.day
         end
-        
-        return Profit.all
     end
 
     def get_storage
+        magic_num = 0.5
         storages = Array.new
         Product.all.each do |p|
             made = Production.where("what_id = ?", p.id).sum("number")
@@ -68,7 +74,7 @@ class WelcomeController < ApplicationController
                 :made => made.round(2),
                 :sold => sold.round(2),
                 :left => (made-sold).round(2),
-                :prio => (sold/(made-sold)).round(2),
+                :prio => (sold/(sold+magic_num)/(made-sold+magic_num)*100).round,
             }
         end
         return storages
@@ -83,7 +89,7 @@ class WelcomeController < ApplicationController
         @rooms = [['01室','01'],['02室','02'],['03室','03'],['05室','05'],['06室','06']];
         @products = Product.all.collect {|p| [ p.name, p.id ] }
         @numbers = [['0份',0],['半份',0.1],['1份',0.2],['1份半',0.3],['2份',0.4],['2份半',0.5],['3份',0.6],['3份半',0.7],['4份',0.8],['4份半',0.9],['5份',1.0]];
-        @cooked =[["煮熟",1],["不煮",0]];
+        @cooked =[["不煮",0],["煮熟",1]];
     end
     
     def create_new_order
