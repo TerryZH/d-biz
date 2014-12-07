@@ -2,13 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:1000px;
-$col_width:11%;
+$tab_width:800px;
+$col_width:12%;
 
 #customer_list, #create_new_customer {
   ul {
     width:$tab_width;
-    height:40px;
     li {
       width:$col_width;
     }
