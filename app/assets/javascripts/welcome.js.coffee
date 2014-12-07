@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+# get location from web
   $("#txtPosition").click ->
     getLocation()
 
@@ -52,4 +53,12 @@ $ ->
     province = province.replace('市', '');
     position.innerHTML = province + "," + city + "," + district;
     position.style.color = 'green';
+
+# dynamically add order items
+  $("#add_new_order_item").click ->
+    newItem=$("#order_item_template").clone().removeAttr("id");
+    itemNum=$(".order_item").length;
+    newItem.html(newItem.html().replace(/_sn_0/g,"_sn_"+itemNum));
+    $("#add_new_order_item").before(newItem);
+    $("#new_order_item_count").attr("value",itemNum+1);
 

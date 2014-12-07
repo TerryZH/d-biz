@@ -3,99 +3,53 @@
 
 <div class="input">
 
-<%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
-<ul class="th">
-  <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
-</ul>
-<ul>
-  <li> <%= f.select :neighbourhood, @neighbourhoods %> </li>
-  <li> <%= f.select :district, @districts %> </li>
-  <li> <%= f.select :building, @buildings %> </li>
-</ul>
-<ul>
-  <li> <%= f.select :unit, @units %> </li>
-  <li> <%= f.select :floor, @floors%> </li>
-  <li> <%= f.select :room, @rooms %> </li>
-</ul>
-<ul>
-</ul>
-<ul>
-  <li> <%= f.select :product0, @products %> </li>
-  <li> <%= f.select :number0, @numbers %> </li>
-  <li> <%= f.select :cooked0, @cooked %> </li>
-  <li> <%= f.text_field :discount0, :value => 0 %> </li>
-</ul>
-<ul>
-  <li> <%= f.select :product1, @products %> </li>
-  <li> <%= f.select :number1, @numbers %> </li>
-  <li> <%= f.select :cooked1, @cooked %> </li>
-  <li> <%= f.text_field :discount1, :value => 0 %> </li>
-</ul>
-<ul>
-  <li> <%= f.select :product2, @products %> </li>
-  <li> <%= f.select :number2, @numbers %> </li>
-  <li> <%= f.select :cooked2, @cooked %> </li>
-  <li> <%= f.text_field :discount2, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product3, @products %> </li>
-<li> <%= f.select :number3, @numbers %> </li>
-<li> <%= f.select :cooked3, @cooked %> </li>
-<li> <%= f.text_field :discount3, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product4, @products %> </li>
-<li> <%= f.select :number4, @numbers %> </li>
-<li> <%= f.select :cooked4, @cooked %> </li>
-<li> <%= f.text_field :discount4, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product5, @products %> </li>
-<li> <%= f.select :number5, @numbers %> </li>
-<li> <%= f.select :cooked5, @cooked %> </li>
-<li> <%= f.text_field :discount5, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product6, @products %> </li>
-<li> <%= f.select :number6, @numbers %> </li>
-<li> <%= f.select :cooked6, @cooked %> </li>
-<li> <%= f.text_field :discount6, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product7, @products %> </li>
-<li> <%= f.select :number7, @numbers %> </li>
-<li> <%= f.select :cooked7, @cooked %> </li>
-<li> <%= f.text_field :discount7, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product8, @products %> </li>
-<li> <%= f.select :number8, @numbers %> </li>
-<li> <%= f.select :cooked8, @cooked %> </li>
-<li> <%= f.text_field :discount8, :value => 0 %> </li>
-</ul>
-<ul>
-<li> <%= f.select :product9, @products %> </li>
-<li> <%= f.select :number9, @numbers %> </li>
-<li> <%= f.select :cooked9, @cooked %> </li>
-<li> <%= f.text_field :discount9, :value => 0 %> </li>
-</ul>
-<ul>
-  <li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
-  <li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
-</ul>
-<% end %>
+  <%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
+  <%= f.hidden_field :item_count, :value => 1 %>
+  <ul class="th">
+    <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
+  </ul>
+  <ul>
+  </ul>
+  <ul>
+    <li> <%= f.select :neighbourhood, @neighbourhoods %> </li>
+    <li> <%= f.select :district, @districts %> </li>
+    <li> <%= f.select :building, @buildings %> </li>
+  </ul>
+  <ul>
+    <li> <%= f.select :unit, @units %> </li>
+    <li> <%= f.select :floor, @floors%> </li>
+    <li> <%= f.select :room, @rooms %> </li>
+  </ul>
+  <ul>
+  </ul>
+  <div class="order_item" id="order_item_template">
+  <ul>
+    <li> <%= f.select :product_sn_0, @products %> </li>
+    <li> <%= f.select :number_sn_0, @numbers %> </li>
+    <li> <%= f.select :cooked_sn_0, @cooked %> </li>
+    <li> <%= f.text_field :discount_sn_0, :value => 0 %> </li>
+  </ul>
+  </div>
+  <ul id="add_new_order_item">
+    <div><%= I18n.t 'views.welcome.index.add_new_order_item' %></div>
+  </ul>
+  <ul>
+    <li> <%= submit_tag I18n.t 'views.submit', class: "closeWin" %> </li>
+    <li> <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %> </li>
+  </ul>
+  <% end %>
 
-<div class="padding" ></div>
+  <div class="padding" ></div>
 
-<div>
-<label><%= @lastorder %></label>
-</div>
+  <div>
+    <label><%= @lastorder %></label>
+  </div>
 
-<div class="padding" ></div>
+  <div class="padding" ></div>
 
-<div>
-<%= render :partial => 'items/list'%>
-</div>
+  <div>
+    <%= render :partial => 'items/list'%>
+  </div>
 
 </div>
 

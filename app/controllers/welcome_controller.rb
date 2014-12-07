@@ -104,7 +104,8 @@ class WelcomeController < ApplicationController
         };
 
         valid_order = false
-        (0..9).each { |i| valid_order ||= (params[:new_order][("number"+i.to_s).to_sym].to_f != 0) }
+        range = (0...(params[:new_order][:item_count].to_i))
+        range.each { |i| valid_order ||= (params[:new_order][("number_sn_"+i.to_s).to_sym].to_f != 0) }
         
         if valid_order
           addr = params[:new_order][:neighbourhood] \
@@ -127,16 +128,16 @@ class WelcomeController < ApplicationController
                            :who_id => c.id,
                            :sum => 0)
           d = Delivery.create(:ship_to_id => a.id)
-          (0..9).each do |i|
-            n = params[:new_order][("number"+i.to_s).to_sym].to_f
-            p = params[:new_order][("product"+i.to_s).to_sym].to_i
+          range.each do |i|
+            n = params[:new_order][("number_sn_"+i.to_s).to_sym].to_f
+            p = params[:new_order][("product_sn_"+i.to_s).to_sym].to_i
             if n != 0
               Item.create(:order_id => o.id,
                           :delivery_id => d.id,
                           :product_id => p,
                           :number => n,
-                          :price => (prices[p] + params[:new_order][("cooked"+i.to_s).to_sym].to_f)*5,
-                          :discount => params[:new_order][("discount"+i.to_s).to_sym].to_f)
+                          :price => (prices[p] + params[:new_order][("cooked_sn_"+i.to_s).to_sym].to_f)*5,
+                          :discount => params[:new_order][("discount_sn_"+i.to_s).to_sym].to_f)
             end
           end
         end

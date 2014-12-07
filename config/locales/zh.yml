@@ -37,6 +37,7 @@ zh:
         tel: "订餐电话："
         lastorder: "最近一个订单总金额%{price}，备零%{change}。详情如下："
         iocomp: "投入资金%{input}元（物料%{input_m}元＋促销%{input_p}元），回收资金%{output}元。现金流%{cashflow}元。"
+        add_new_order_item: "（点击此处增加新项目）"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"
