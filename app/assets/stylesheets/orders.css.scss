@@ -2,13 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:1200px;
+$tab_width:600px;
 $col_width:16%;
 
 #order_list, #create_new_order {
   ul {
     width:$tab_width;
-    height:40px;
     li {
       width:$col_width;
     }

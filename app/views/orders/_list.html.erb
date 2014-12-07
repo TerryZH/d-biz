@@ -13,10 +13,9 @@
   <% @orders.each do |order| %>
     <ul>
       <li><%= order.when %></li>
-      <li><%= Customer.find(order.who_id).address %> (<%= Customer.find(order.who_id).tel %>) </li>
+      <li><%= Customer.find(order.who_id).tel %></li>
       <li><%= order.sum %></li>
-      <li><%= link_to I18n.t('views.details'), {:controller=>"orderdetails", :action=>"index",:id=>order} %></li>
-      <li><%= link_to I18n.t('views.delete'), {:controller=>"orders", :action=>"delete",:id=>order}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.details'), {:controller=>"items", :action=>"index",:id=>order} %></li>
       <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>

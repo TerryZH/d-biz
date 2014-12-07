@@ -13,15 +13,15 @@ class WelcomeController < ApplicationController
 
         @storages = get_storage
         @made_total = Production.sum("number").round(2)
-        @sold_total = Orderdetail.sum("number").round(2)
+        @sold_total = Item.sum("number").round(2)
         @left_total = (@made_total-@sold_total).round(2)
         
         prepare_lists
         
         o = Order.last
-        @orderdetails = Orderdetail.where(:order_id => o.id)
-        @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :address=>Customer.find_by_id(o.who_id).address}
-        @iocomp = (I18n.t 'views.welcome.index.iocomp') % {:input=>(Promotion.sum("sum")+Material.sum("sum")).round(2), :input_p=>Promotion.sum("sum").round(2), :input_m=>Material.sum("sum").round(2), :output=>Order.sum("sum").round(2)}
+        @items = Item.where(:order_id => o.id).group_by {|item| item.delivery_id}
+        @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :change=>(100-o.sum).round(2)}
+        @iocomp = (I18n.t 'views.welcome.index.iocomp') % {:input=>(Promotion.sum("sum")+Material.sum("sum")).round(2), :input_p=>Promotion.sum("sum").round(2), :input_m=>Material.sum("sum").round(2), :output=>Order.sum("sum").round(2), :cashflow=>(Order.sum("sum")-Promotion.sum("sum")-Material.sum("sum")).round(2)}
 
     end
     
@@ -45,7 +45,7 @@ class WelcomeController < ApplicationController
         while today <= Date.today do
             profit_today = 0
             amount_today = 0
-            products_today = Orderdetail.joins(:order).where('orders.when' => today)
+            products_today = Item.joins(:order).where('orders.when' => today)
             products_today.each do |p|
                 profit_today+=p.number*p.price*profit_rate[p.product_id]-p.discount
                 amount_today+=p.number*p.price-p.discount
@@ -68,7 +68,7 @@ class WelcomeController < ApplicationController
         storages = Array.new
         Product.all.each do |p|
             made = Production.where("what_id = ?", p.id).sum("number")
-            sold = Orderdetail.where("product_id = ?", p.id).sum("number")
+            sold = Item.where("product_id = ?", p.id).sum("number")
             storages.insert -1, {
                 :product => p.name,
                 :made => made.round(2),
@@ -103,35 +103,40 @@ class WelcomeController < ApplicationController
             7 => 13,
         };
 
-        addr = params[:new_order][:neighbourhood] \
-             + params[:new_order][:district] \
-             + params[:new_order][:building] \
-             + params[:new_order][:unit] \
-             + params[:new_order][:floor] \
-             + params[:new_order][:room]
-        c = Customer.find_by_address(addr) ||
-            Customer.create(:when_joined => Date.today,
-                            :nick => "",
-                            :address => addr,
-                            :tel => params[:new_order][:tel],
-                            :email => "",
-                            :wechat => "",
-                            :weibo => "")
         valid_order = false
         (0..9).each { |i| valid_order ||= (params[:new_order][("number"+i.to_s).to_sym].to_f != 0) }
+        
         if valid_order
+          addr = params[:new_order][:neighbourhood] \
+               + params[:new_order][:district] \
+               + params[:new_order][:building] \
+               + params[:new_order][:unit] \
+               + params[:new_order][:floor] \
+               + params[:new_order][:room]
+          c = Customer.find_by_tel(params[:new_order][:tel]) ||
+              Customer.create(:when_joined => Date.today,
+                              :nick => "",
+                              :tel => params[:new_order][:tel],
+                              :email => "",
+                              :wechat => "",
+                              :weibo => "")
+          a = Address.find_by_location(addr) ||
+              Address.create(:region => "北京市朝阳区管庄乡",
+                             :location => addr)
           o = Order.create(:when => Date.today,
                            :who_id => c.id,
                            :sum => 0)
+          d = Delivery.create(:ship_to_id => a.id)
           (0..9).each do |i|
             n = params[:new_order][("number"+i.to_s).to_sym].to_f
             p = params[:new_order][("product"+i.to_s).to_sym].to_i
             if n != 0
-              Orderdetail.create(:order_id => o.id,
-                                 :product_id => p,
-                                 :number => n,
-                                 :price => (prices[p] + params[:new_order][("cooked"+i.to_s).to_sym].to_f)*5,
-                                 :discount => params[:new_order][("discount"+i.to_s).to_sym].to_f)
+              Item.create(:order_id => o.id,
+                          :delivery_id => d.id,
+                          :product_id => p,
+                          :number => n,
+                          :price => (prices[p] + params[:new_order][("cooked"+i.to_s).to_sym].to_f)*5,
+                          :discount => params[:new_order][("discount"+i.to_s).to_sym].to_f)
             end
           end
         end

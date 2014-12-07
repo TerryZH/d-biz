@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  who_id: 
+  start: 2014-12-07 12:13:52
+  milestone0: 2014-12-07 12:13:52
+  milestone1: 2014-12-07 12:13:52
+  milestone2: 2014-12-07 12:13:52
+  milestone3: 2014-12-07 12:13:52
+  milestone4: 2014-12-07 12:13:52
+  milestone5: 2014-12-07 12:13:52
+  milestone6: 2014-12-07 12:13:52
+  milestone7: 2014-12-07 12:13:52
+  milestone8: 2014-12-07 12:13:52
+  milestone9: 2014-12-07 12:13:52
+  end: 2014-12-07 12:13:52
+  bill_to_id: 
+  deliver_to_id: 
+
+two:
+  who_id: 
+  start: 2014-12-07 12:13:52
+  milestone0: 2014-12-07 12:13:52
+  milestone1: 2014-12-07 12:13:52
+  milestone2: 2014-12-07 12:13:52
+  milestone3: 2014-12-07 12:13:52
+  milestone4: 2014-12-07 12:13:52
+  milestone5: 2014-12-07 12:13:52
+  milestone6: 2014-12-07 12:13:52
+  milestone7: 2014-12-07 12:13:52
+  milestone8: 2014-12-07 12:13:52
+  milestone9: 2014-12-07 12:13:52
+  end: 2014-12-07 12:13:52
+  bill_to_id: 
+  deliver_to_id: 

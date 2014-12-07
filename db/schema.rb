@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205085818) do
+ActiveRecord::Schema.define(version: 20141207041358) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "region"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "customers", force: true do |t|
     t.date     "when_joined"
     t.string   "nick"
-    t.string   "address"
     t.string   "tel"
     t.string   "email"
     t.string   "wechat"
@@ -34,8 +40,9 @@ ActiveRecord::Schema.define(version: 20141205085818) do
     t.datetime "updated_at"
   end
 
-  create_table "orderdetails", force: true do |t|
+  create_table "items", force: true do |t|
     t.integer  "order_id"
+    t.integer  "delivery_id"
     t.integer  "product_id"
     t.float    "number"
     t.float    "price"
@@ -44,8 +51,9 @@ ActiveRecord::Schema.define(version: 20141205085818) do
     t.datetime "updated_at"
   end
 
-  add_index "orderdetails", ["order_id"], name: "index_orderdetails_on_order_id"
-  add_index "orderdetails", ["product_id"], name: "index_orderdetails_on_product_id"
+  add_index "items", ["delivery_id"], name: "index_items_on_delivery_id"
+  add_index "items", ["order_id"], name: "index_items_on_order_id"
+  add_index "items", ["product_id"], name: "index_items_on_product_id"
 
   create_table "orders", force: true do |t|
     t.date     "when"
@@ -97,5 +105,29 @@ ActiveRecord::Schema.define(version: 20141205085818) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "deliveries", force: true do |t|
+    t.integer  "who_id"
+    t.datetime "start"
+    t.datetime "milestone0"
+    t.datetime "milestone1"
+    t.datetime "milestone2"
+    t.datetime "milestone3"
+    t.datetime "milestone4"
+    t.datetime "milestone5"
+    t.datetime "milestone6"
+    t.datetime "milestone7"
+    t.datetime "milestone8"
+    t.datetime "milestone9"
+    t.datetime "end"
+    t.integer  "bill_to_id"
+    t.integer  "ship_to_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deliveries", ["bill_to_id"], name: "index_deliveries_on_bill_to_id"
+  add_index "deliveries", ["ship_to_id"], name: "index_deliveries_on_ship_to_id"
+  add_index "deliveries", ["who_id"], name: "index_deliveries_on_who_id"
 
 end

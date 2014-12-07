@@ -1,3 +1,3 @@
 class Order < ActiveRecord::Base
-  has_many :orderdetails
+  has_many :items
 end

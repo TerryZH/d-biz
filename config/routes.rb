@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   get 'materials/delete'
   post 'materials/index' => 'materials#create'
 
-  get 'orderdetails/index'
-  get 'orderdetails/delete'
-  post 'orderdetails/index' => 'orderdetails#create'
+  get 'items/index'
+  get 'items/delete'
+  post 'items/index' => 'items#create'
 
   get 'orders/index'
   get 'orders/delete'
