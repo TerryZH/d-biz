@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
     def index
         @profit_total=0
         @amount_total=0
-        refresh_profit_history
+        Profit.refresh
         Profit.all.each do |p|
             @profit_total+=p.profit
             @amount_total+=p.amount
@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
         @amount_total = @amount_total.round(2)
         @profits = Profit.all.order('created_at DESC').page(params[:page]).per(5)
 
-        @storages = get_storage
+        @storages = Product.get_storages
         @made_total = Production.sum("number").round(2)
         @sold_total = Item.sum("number").round(2)
         @left_total = (@made_total-@sold_total).round(2)
@@ -25,122 +25,21 @@ class WelcomeController < ApplicationController
 
     end
     
-    def refresh_profit_history
-        profit_rate = {
-            1 => 0.68,
-            2 => 0.71,
-            3 => 0.62,
-            4 => 0.58,
-            5 => 0.57,
-            6 => 0.62,
-            7 => 0.69,
-        };
-        
-        if Profit.exists?
-            today = Profit.last.when
-        else
-            today = Order.first.when
-        end
-
-        while today <= Date.today do
-            profit_today = 0
-            amount_today = 0
-            products_today = Item.joins(:order).where('orders.when' => today)
-            products_today.each do |p|
-                profit_today+=p.number*p.price*profit_rate[p.product_id]-p.discount
-                amount_today+=p.number*p.price-p.discount
-            end
-            if amount_today != 0
-                profit_today = profit_today.round(2)
-                amount_today = amount_today.round(2)
-                p = Profit.find_by_when(today) || Profit.new
-                p.when = today
-                p.profit = profit_today
-                p.amount = amount_today
-                p.save
-            end
-            today += 1.day
-        end
+    def create_new_order
+        Order.process_new_order(params)
+        redirect_to :action => 'index'
     end
 
-    def get_storage
-        magic_num = 0.5
-        storages = Array.new
-        Product.all.each do |p|
-            made = Production.where("what_id = ?", p.id).sum("number")
-            sold = Item.where("product_id = ?", p.id).sum("number")
-            storages.insert -1, {
-                :product => p.name,
-                :made => made.round(2),
-                :sold => sold.round(2),
-                :left => (made-sold).round(2),
-                :prio => (sold/(sold+magic_num)/(made-sold+magic_num)*100).round,
-            }
-        end
-        return storages
-    end
-    
     def prepare_lists
         @neighbourhoods = [['北京新天地','北京新天地']];
         @districts = [['1期','1期'],['2期','2期'],['3期','3期'],['4期','4期']];
-        @buildings = [['1号楼','1号楼'],['3号楼','3号楼'],['6号楼','6号楼'],['7号楼','7号楼'],['8号楼','8号楼'],['11号楼','11号楼'],['12号楼','12号楼'],['16号楼','16号楼']];
+        @buildings = [['1号楼','1号楼'],['3号楼','3号楼'],['6号楼','6号楼'],['7号楼','7号楼'],['8号楼','8号楼'],['11号楼','11号楼'],['12号楼','12号楼'],['16号楼','16号楼'],['18号楼','18号楼'],['20号楼','20号楼']];
         @units = [['1单元','1单元'],['2单元','2单元'],['3单元','3单元'],['4单元','4单元']];
         @floors = [['1层','1'],['2层','2'],['3层','3'],['4层','4'],['5层','5'],['6层','6'],['7层','7'],['8层','8'],['9层','9'],['10层','10'],['11层','11'],['12层','12'],['13层','13'],['14层','14'],['15层','15'],['16层','16'],['17层','17'],['18层','18'],['19层','19'],['20层','20'],['21层','21'],['22层','22'],['23层','23'],['24层','24'],['25层','25'],['26层','26'],['27层','27'],['28层','28']];
         @rooms = [['01室','01'],['02室','02'],['03室','03'],['05室','05'],['06室','06']];
         @products = Product.all.collect {|p| [ p.name, p.id ] }
-        @numbers = [['0份',0],['半份',0.1],['1份',0.2],['1份半',0.3],['2份',0.4],['2份半',0.5],['3份',0.6],['3份半',0.7],['4份',0.8],['4份半',0.9],['5份',1.0]];
-        @cooked =[["不煮",0],["煮熟",1]];
+        @numbers = [['0份',0],['1个',1],['2个',2],['3个',3],['4个',4],['半份',5],['1份',10],['1份半',15],['2份',20],['2份半',25],['3份',30],['3份半',35],['4份',40],['4份半',45],['5份',50]];
+        @cooked =[["不煮",0],["煮熟",1],["试吃",2]];
     end
-    
-    def create_new_order
-        prices = {
-            1 => 10,
-            2 => 9,
-            3 => 10,
-            4 => 12,
-            5 => 13,
-            6 => 13,
-            7 => 13,
-        };
 
-        valid_order = false
-        range = (0...(params[:new_order][:item_count].to_i))
-        range.each { |i| valid_order ||= (params[:new_order][("number_sn_"+i.to_s).to_sym].to_f != 0) }
-        
-        if valid_order
-          addr = params[:new_order][:neighbourhood] \
-               + params[:new_order][:district] \
-               + params[:new_order][:building] \
-               + params[:new_order][:unit] \
-               + params[:new_order][:floor] \
-               + params[:new_order][:room]
-          c = Customer.find_by_tel(params[:new_order][:tel]) ||
-              Customer.create(:when_joined => Date.today,
-                              :nick => "",
-                              :tel => params[:new_order][:tel],
-                              :email => "",
-                              :wechat => "",
-                              :weibo => "")
-          a = Address.find_by_location(addr) ||
-              Address.create(:region => "北京市朝阳区管庄乡",
-                             :location => addr)
-          o = Order.create(:when => Date.today,
-                           :who_id => c.id,
-                           :sum => 0)
-          d = Delivery.create(:ship_to_id => a.id)
-          range.each do |i|
-            n = params[:new_order][("number_sn_"+i.to_s).to_sym].to_f
-            p = params[:new_order][("product_sn_"+i.to_s).to_sym].to_i
-            if n != 0
-              Item.create(:order_id => o.id,
-                          :delivery_id => d.id,
-                          :product_id => p,
-                          :number => n,
-                          :price => (prices[p] + params[:new_order][("cooked_sn_"+i.to_s).to_sym].to_f)*5,
-                          :discount => params[:new_order][("discount_sn_"+i.to_s).to_sym].to_f)
-            end
-          end
-        end
-        redirect_to :action => 'index'
-    end
 end

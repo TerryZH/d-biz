@@ -6,6 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.references :product, index: true
       t.float :number
       t.float :price
+      t.float :cost
       t.float :discount
 
       t.timestamps

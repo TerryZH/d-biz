@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207041358) do
+ActiveRecord::Schema.define(version: 20141212020018) do
 
   create_table "addresses", force: true do |t|
     t.string   "region"
@@ -27,81 +27,6 @@ ActiveRecord::Schema.define(version: 20141207041358) do
     t.string   "email"
     t.string   "wechat"
     t.string   "weibo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "materials", force: true do |t|
-    t.date     "when"
-    t.string   "what"
-    t.float    "sum"
-    t.float    "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "items", force: true do |t|
-    t.integer  "order_id"
-    t.integer  "delivery_id"
-    t.integer  "product_id"
-    t.float    "number"
-    t.float    "price"
-    t.float    "discount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "items", ["delivery_id"], name: "index_items_on_delivery_id"
-  add_index "items", ["order_id"], name: "index_items_on_order_id"
-  add_index "items", ["product_id"], name: "index_items_on_product_id"
-
-  create_table "orders", force: true do |t|
-    t.date     "when"
-    t.integer  "who_id"
-    t.float    "sum"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "orders", ["who_id"], name: "index_orders_on_who_id"
-
-  create_table "productions", force: true do |t|
-    t.date     "when"
-    t.integer  "who_id"
-    t.integer  "what_id"
-    t.float    "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "productions", ["what_id"], name: "index_productions_on_what_id"
-  add_index "productions", ["who_id"], name: "index_productions_on_who_id"
-
-  create_table "products", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "profits", force: true do |t|
-    t.float    "profit"
-    t.float    "amount"
-    t.date     "when"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "promotions", force: true do |t|
-    t.date     "when"
-    t.string   "what"
-    t.float    "sum"
-    t.float    "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "workers", force: true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,5 +54,83 @@ ActiveRecord::Schema.define(version: 20141207041358) do
   add_index "deliveries", ["bill_to_id"], name: "index_deliveries_on_bill_to_id"
   add_index "deliveries", ["ship_to_id"], name: "index_deliveries_on_ship_to_id"
   add_index "deliveries", ["who_id"], name: "index_deliveries_on_who_id"
+
+  create_table "items", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "delivery_id"
+    t.integer  "product_id"
+    t.float    "number"
+    t.float    "price"
+    t.float    "cost"
+    t.float    "discount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "items", ["delivery_id"], name: "index_items_on_delivery_id"
+  add_index "items", ["order_id"], name: "index_items_on_order_id"
+  add_index "items", ["product_id"], name: "index_items_on_product_id"
+
+  create_table "materials", force: true do |t|
+    t.date     "when"
+    t.string   "what"
+    t.float    "sum"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.date     "when"
+    t.integer  "who_id"
+    t.float    "sum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["who_id"], name: "index_orders_on_who_id"
+
+  create_table "productions", force: true do |t|
+    t.date     "when"
+    t.integer  "who_id"
+    t.integer  "what_id"
+    t.float    "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "productions", ["what_id"], name: "index_productions_on_what_id"
+  add_index "productions", ["who_id"], name: "index_productions_on_who_id"
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "cost"
+    t.float    "price"
+  end
+
+  create_table "profits", force: true do |t|
+    t.float    "profit"
+    t.float    "amount"
+    t.date     "when"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "promotions", force: true do |t|
+    t.date     "when"
+    t.string   "what"
+    t.float    "sum"
+    t.float    "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

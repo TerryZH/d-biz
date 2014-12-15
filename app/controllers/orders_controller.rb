@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
     def index
-        @orders = Order.all.order('created_at DESC').page(params[:page]).per(5)
+        if params[:id]
+            @orders = Order.where(:who_id=>params[:id]).order('created_at DESC').page(params[:page]).per(5)
+        else
+            @orders = Order.all.order('created_at DESC').page(params[:page]).per(5)
+        end
         @summary = (I18n.t 'views.orders.index.summary') % {:count=>Order.all.count, :sum=>Order.sum("sum")}
     end
     

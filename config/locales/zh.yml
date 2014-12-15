@@ -87,13 +87,14 @@ zh:
         title: "客户"
         summary: "共积累%{count}位客户。"
         add_new: "增加新的客户记录"
-        when: "首次订单日期"
+        when: "首次订单"
         nick: "昵称"
         address: "地址"
         tel: "电话"
         email: "电子邮件"
         wechat: "微信"
         weibo: "微博"
+        orders: "订单"
     promotions:
       index:
         title: "促销"

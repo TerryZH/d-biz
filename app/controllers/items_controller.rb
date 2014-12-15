@@ -5,8 +5,14 @@ class ItemsController < ApplicationController
           @items = Item.where(:order_id => params[:id]).group_by {|item| item.delivery_id}
           @products = Product.all.collect {|p| [ p.name, p.id ] }
           sum = 0
-          @items.each {|delivery, items| items.each { |item| sum+=(item.price*item.number-item.discount) } }
-          @summary = (I18n.t 'views.items.index.summary') % {:count=>@items.count, :sum=>sum}
+          count = 0
+          @items.each do |delivery, items|
+              items.each do |item|
+                  sum+=(item.price*item.number-item.discount)
+                  count+=1
+              end
+          end
+          @summary = (I18n.t 'views.items.index.summary') % {:count=>count, :sum=>sum}
         else
           redirect_to :controller => 'orders', :action => 'index'
         end

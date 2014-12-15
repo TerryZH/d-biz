@@ -16,7 +16,7 @@
     <% items.each do |item| %>
     <ul>
       <li><%= Product.find(item.product_id).name %> </li>
-      <li><%= (item.number*50).round(2) %></li>
+      <li><%= item.number %></li>
       <li><%= item.discount %></li>
       <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
