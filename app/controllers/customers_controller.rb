@@ -1,6 +1,10 @@
 class CustomersController < ApplicationController
     def index
-        @customers = Customer.all.order('created_at DESC').page(params[:page]).per(5)
+        if params[:tel]
+            @customers = Customer.where(:tel=>params[:tel]).order('created_at DESC').page(params[:page]).per(5)
+        else
+            @customers = Customer.all.order('created_at DESC').page(params[:page]).per(5)
+        end
         @summary = (I18n.t 'views.customers.index.summary') % {:count=>Customer.all.count}
     end
     

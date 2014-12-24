@@ -22,8 +22,8 @@
       <li><%= customer.email.empty? ? "(null)" : customer.email %></li>
       <li><%= customer.wechat.empty? ? "(null)" : customer.wechat %></li>
       <li><%= customer.weibo.empty? ? "(null)" : customer.weibo %></li>
-      <li><%= link_to I18n.t('views.customers.index.orders'), {:controller=>"orders", :action=>"index",:id=>customer}%></li>
-      <li><%= link_to I18n.t('views.delete'), {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete"%></li>
+      <li><%= link_to I18n.t('views.customers.index.orders'), {:controller=>"orders", :action=>"index",:id=>customer} %></li>
+      <li><%= link_to I18n.t('views.delete'), {:controller=>"customers", :action=>"delete",:id=>customer}, :class=>"delete" %></li>
       <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
   <% end %>

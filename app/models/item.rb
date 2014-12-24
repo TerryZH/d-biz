@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
         Item.where(:order_id => self.order_id).each do |od|
             order.sum += od.price*od.number-od.discount
         end
+        order.sum = order.sum.round(2)
         order.save
     end
 end

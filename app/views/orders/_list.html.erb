@@ -13,7 +13,7 @@
   <% @orders.each do |order| %>
     <ul>
       <li><%= order.when %></li>
-      <li><%= Customer.find(order.who_id).tel %></li>
+      <li><%= link_to Customer.find(order.who_id).tel, {:controller=>"customers", :action=>"index",:tel=>Customer.find(order.who_id).tel} %></li>
       <li><%= order.sum %></li>
       <li><%= link_to I18n.t('views.details'), {:controller=>"items", :action=>"index",:id=>order} %></li>
       <li><%= link_to I18n.t('views.edit'), "#" %></li>
