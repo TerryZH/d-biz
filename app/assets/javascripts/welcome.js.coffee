@@ -9,74 +9,99 @@ $ ->
 
   getLocation = () ->
     if navigator.geolocation
-      config = { enableHighAccuracy: true, timeout: 5000, maximumAge: 30000 };
-      navigator.geolocation.getCurrentPosition(showPosition, showError, config);
+      config = { enableHighAccuracy: true, timeout: 5000, maximumAge: 30000 }
+      navigator.geolocation.getCurrentPosition(showPosition, showError, config)
     else
-      alert("定位失败,用户已禁用位置获取权限");
+      alert("定位失败,用户已禁用位置获取权限")
 
   showPosition = (position) ->
-    x = position.coords.latitude;
-    y = position.coords.longitude;
+    x = position.coords.latitude
+    y = position.coords.longitude
     url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b" +
           "&callback=renderReverse" +
           "&location=" + x + "," + y +
           "&output=json" +
-          "&pois=0";
+          "&pois=0"
     ajax_on_suc = (json) ->
       if json == null or typeof (json) == "undefined"
-        return;
+        return
       if json.status != 0
-        return;
-      setAddress(json.result.addressComponent);
+        return
+      setAddress(json.result.addressComponent)
     ajax_on_err = (XMLHttpRequest, textStatus, errorThrown) ->
-      alert("[x:" + x + ",y:" + y + "]地址位置获取失败,请手动选择地址");
+      alert("[x:" + x + ",y:" + y + "]地址位置获取失败,请手动选择地址")
     $.ajax({
       type: "GET",
       dataType: "jsonp",
       url: url,
       success: ajax_on_suc,
       error: ajax_on_err
-      });
+      })
 
   showError = (error) ->
     switch error.code
-      when error.PERMISSION_DENIED then alert("定位失败,用户拒绝请求地理定位");
-      when error.POSITION_UNAVAILABLE then alert("定位失败,位置信息是不可用");
-      when error.TIMEOUT then alert("定位失败,请求获取用户位置超时");
-      when error.UNKNOWN_ERROR then alert("定位失败,定位系统失效");
+      when error.PERMISSION_DENIED then alert("定位失败,用户拒绝请求地理定位")
+      when error.POSITION_UNAVAILABLE then alert("定位失败,位置信息是不可用")
+      when error.TIMEOUT then alert("定位失败,请求获取用户位置超时")
+      when error.UNKNOWN_ERROR then alert("定位失败,定位系统失效")
 
   setAddress = (json) ->
-    position = $("#txtPosition")[0];
-    province = json.province;
-    city = json.city;
-    district = json.district;
-    province = province.replace('市', '');
-    position.innerHTML = province + "," + city + "," + district;
-    position.style.color = 'green';
+    position = $("#txtPosition")[0]
+    province = json.province
+    city = json.city
+    district = json.district
+    province = province.replace('市', '')
+    position.innerHTML = province + "," + city + "," + district
+    position.style.color = 'green'
 
 # dynamically add order items
   $("#add_new_order_item").click ->
-    newItem=$("#order_item_template").clone().removeAttr("id");
-    itemNum=$(".order_item").length;
-    newItem.html(newItem.html().replace(/_sn_0/g,"_sn_"+itemNum));
-    $("#add_new_order_item").before(newItem);
-    $("#new_order_item_count").attr("value",itemNum+1);
+    newItem = $("#order_item_template").clone().removeAttr("id")
+    itemNum = $(".order_item").length
+    newItem.html(newItem.html().replace(/_sn_0/g,"_sn_"+itemNum))
+    $("#add_new_order_item").before(newItem)
+    $("#new_order_item_count").attr("value",itemNum+1)
 
 # find address per tel #
   $("#new_order_tel").keyup ->
-    findAddrPerTel($("#find_address_per_tel_url")[0].innerHTML, $("#new_order_tel")[0].value, "_tel_ph_")
+    findCustDetailsPerTel($("#find_customer_details_url")[0].innerHTML, $("#new_order_tel")[0].value, "_tel_ph_")
 
-  findAddrPerTel = (url_template, tel_number, tel_placeholder) ->
-    url = url_template.replace(eval("/"+tel_placeholder+"/g"),tel_number);
-    ajax_on_suc = (json) ->
-      if json.length
+  findCustDetailsPerTel = (url_template, tel_number, tel_placeholder) ->
+    url = url_template.replace(eval("/"+tel_placeholder+"/g"),tel_number)
+
+    handle_addresses = (addresses) ->
+      if addresses.length
         address_list = ""
-        address_list += "<div>" + a.location + "</div>" for a in json
+        address_list += "<div>" + a.location + "</div>" for a in addresses
       else
         address_list = $("#no_address_for_current_tel")[0].innerHTML
       $("#address_list")[0].innerHTML = address_list
+
+    handle_preferences_historical = (intermediate_id, historical_preferences) ->
+      $("#"+intermediate_id+" .preferences_historical_"+p.product_id+"")[0].innerHTML = p.product_number for p in historical_preferences
+
+    handle_preferences_last_order = (intermediate_id, last_order_preferences) ->
+      $("#"+intermediate_id+" .preferences_last_order_"+p.product_id+"")[0].innerHTML = p.product_number for p in last_order_preferences
+
+    handle_preferences = (preferences) ->
+      if preferences.historical.length || preferences.last_order.length
+        intermediate_id = "preference_table_intermediate"
+        newItem = $("#preference_table_template").clone().attr("id",intermediate_id)
+        $("#preference_table_template").before(newItem)
+        handle_preferences_historical(intermediate_id, preferences.historical)
+        handle_preferences_last_order(intermediate_id, preferences.last_order)
+        preference_table = $("#"+intermediate_id)[0].innerHTML
+        $("#"+intermediate_id).remove()
+      else
+        preference_table = $("#no_preference_for_current_tel")[0].innerHTML
+      $("#preference_table")[0].innerHTML = preference_table
+
+    ajax_on_suc = (json) ->
+      handle_addresses(json.address)
+      handle_preferences(json.preference)
+
     ajax_on_err = (XMLHttpRequest, textStatus, errorThrown) ->
-      alert(textStatus);
+      alert(textStatus)
 
     $.ajax({
       type: "GET",
@@ -84,5 +109,5 @@ $ ->
       url: url,
       success: ajax_on_suc,
       error: ajax_on_err
-    });
+    })
 

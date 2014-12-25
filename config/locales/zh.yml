@@ -42,6 +42,11 @@ zh:
         iocomp: "投入资金%{input}元（物料%{input_m}元＋促销%{input_p}元），回收资金%{output}元。现金流%{cashflow}元。"
         add_new_order_item: "（点击此处增加新项目）"
         no_address_for_current_tel: "（暂无对应此电话号码的送货地址）"
+        no_preference_for_current_tel: "（暂无对应此电话号码的订货记录）"
+        preferences:
+          product: "产品"
+          historical: "历史订单"
+          last_order: "上次订单"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"

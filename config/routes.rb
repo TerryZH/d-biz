@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
-  get 'welcome/find_address_per_tel'
+  get 'welcome/find_customer_details'
   post 'welcome/index' => 'welcome#create_new_order'
 
   get 'customers/index'

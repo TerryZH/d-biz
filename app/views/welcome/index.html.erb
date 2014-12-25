@@ -1,8 +1,31 @@
 <h1><%= I18n.t 'views.welcome.index.title' %></h1>
 <p></p>
 
-<div id="no_address_for_current_tel" hidden="true"><%= I18n.t 'views.welcome.index.no_address_for_current_tel' %></div>
-<div id="find_address_per_tel_url" hidden="true"><%= url_for :controller => "welcome", :action => "find_address_per_tel", :tel=>"_tel_ph_", :format => "json" %></div>
+<div id="no_address_for_current_tel" hidden="true">
+  <%= I18n.t 'views.welcome.index.no_address_for_current_tel' %>
+</div>
+<div id="no_preference_for_current_tel" hidden="true">
+  <%= I18n.t 'views.welcome.index.no_preference_for_current_tel' %>
+</div>
+<div id="find_customer_details_url" hidden="true">
+  <%= url_for :controller => "welcome", :action => "find_customer_details", :tel=>"_tel_ph_", :format => "json" %>
+</div>
+<ul id="preference_table_template" hidden="true">
+<div>
+<ul class="th">
+  <li><%= I18n.t 'views.welcome.index.preferences.product' %></li>
+  <li><%= I18n.t 'views.welcome.index.preferences.historical' %></li>
+  <li><%= I18n.t 'views.welcome.index.preferences.last_order' %></li>
+</ul>
+<% @products.each do |p| %>
+  <ul>
+    <li><%= p[0] %></li>
+    <li class="preferences_historical_<%= p[1] %>"> - </li>
+    <li class="preferences_last_order_<%= p[1] %>"> - </li>
+  </ul>
+<%end%>
+</div>
+</ul>
 
 <div class="input">
 
@@ -13,6 +36,9 @@
   </ul>
   <ul class="grey_tab" id="address_list">
     <%= I18n.t 'views.welcome.index.no_address_for_current_tel' %>
+  </ul>
+  <ul class="grey_tab" id="preference_table">
+    <%= I18n.t 'views.welcome.index.no_preference_for_current_tel' %>
   </ul>
   <ul class="th">
     <li><%= I18n.t 'views.welcome.index.addr' %></li>

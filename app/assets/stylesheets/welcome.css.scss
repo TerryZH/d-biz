@@ -55,6 +55,19 @@ $col_width:20%;
   text-indent: 22em;
 }
 
+#preference_table {
+  height:auto;
+  div {
+    margin:auto;
+    padding:1.5em;
+    width:66%;
+    ul li {
+      text-indent:0;
+      width:33%
+    }
+  }
+}
+
 .grey_tab {
   font-size:10px;
   text-align:center;
