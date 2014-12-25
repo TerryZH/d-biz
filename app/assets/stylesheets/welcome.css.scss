@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:400px;
+$tab_width:40em;
 $col_width:25%;
 
 #profit_trend {
@@ -15,7 +15,7 @@ $col_width:25%;
   }
 }
 
-$tab_width:500px;
+$tab_width:50em;
 $col_width:20%;
 
 #storage_trend {
@@ -28,13 +28,36 @@ $col_width:20%;
   }
 }
 
-#create-new-order {
-  ul li {height:18px;}
-  input {width:90px;}
+.order_item {
+  li {
+    text-indent:4em;
+  }
 }
 
-#add_new_order_item {
+#address_detail {
+  height:5em;
+  li {
+    float:none;
+    text-indent:4em;
+  }
+  select {
+    width:9.6em;
+  }
+}
+
+#create-new-order {
+  ul li {height:1.5em;}
+  input {width:4em;}
+  input#new_order_tel {width:8em;}
+}
+
+#submit_cancel_tab li {
+  text-indent: 22em;
+}
+
+.grey_tab {
   font-size:10px;
-  text-align: center;
+  text-align:center;
   color:grey;
+  height:auto;
 }

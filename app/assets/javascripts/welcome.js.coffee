@@ -62,3 +62,27 @@ $ ->
     $("#add_new_order_item").before(newItem);
     $("#new_order_item_count").attr("value",itemNum+1);
 
+# find address per tel #
+  $("#new_order_tel").keyup ->
+    findAddrPerTel($("#find_address_per_tel_url")[0].innerHTML, $("#new_order_tel")[0].value, "_tel_ph_")
+
+  findAddrPerTel = (url_template, tel_number, tel_placeholder) ->
+    url = url_template.replace(eval("/"+tel_placeholder+"/g"),tel_number);
+    ajax_on_suc = (json) ->
+      if json.length
+        address_list = ""
+        address_list += "<div>" + a.location + "</div>" for a in json
+      else
+        address_list = $("#no_address_for_current_tel")[0].innerHTML
+      $("#address_list")[0].innerHTML = address_list
+    ajax_on_err = (XMLHttpRequest, textStatus, errorThrown) ->
+      alert(textStatus);
+
+    $.ajax({
+      type: "GET",
+      dataType: "text json",
+      url: url,
+      success: ajax_on_suc,
+      error: ajax_on_err
+    });
+

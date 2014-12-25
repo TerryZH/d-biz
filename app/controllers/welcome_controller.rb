@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+    respond_to :html, :xml, :json
     def index
         @profit_total=0
         @amount_total=0
@@ -42,4 +43,15 @@ class WelcomeController < ApplicationController
         @cooked =[["不煮",0],["煮熟",1],["试吃",2]];
     end
 
+    def find_address_per_tel
+        response = Array.new
+        customers = Customer.where(:tel => params[:tel])
+        customers.each do |c|
+          addresses = Address.find_by_sql ["select distinct addresses.* from items join deliveries on items.delivery_id=deliveries.id join orders on items.order_id=orders.id join addresses on deliveries.ship_to_id=addresses.id where orders.who_id=?", c.id]
+          addresses.each do |a|
+              response.insert -1, a
+          end
+        end
+        respond_with response
+    end
 end

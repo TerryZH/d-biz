@@ -35,9 +35,13 @@ zh:
         left: "剩余库存"
         prio: "去化指标"
         tel: "订餐电话："
+        addr: "送餐地址："
+        details: "订餐详情："
+        discount: "折扣："
         lastorder: "最近一个订单总金额%{price}，备零%{change}。详情如下："
         iocomp: "投入资金%{input}元（物料%{input_m}元＋促销%{input_p}元），回收资金%{output}元。现金流%{cashflow}元。"
         add_new_order_item: "（点击此处增加新项目）"
+        no_address_for_current_tel: "（暂无对应此电话号码的送货地址）"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"
