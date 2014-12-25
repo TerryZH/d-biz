@@ -4,6 +4,7 @@
   <li><%= I18n.t 'views.customers.index.when' %></li>
   <li><%= I18n.t 'views.customers.index.nick' %></li>
   <li><%= I18n.t 'views.customers.index.tel' %></li>
+  <li><%= I18n.t 'views.customers.index.sum' %></li>
   <li><%= I18n.t 'views.customers.index.email' %></li>
   <li><%= I18n.t 'views.customers.index.wechat' %></li>
   <li><%= I18n.t 'views.customers.index.weibo' %></li>
@@ -19,6 +20,7 @@
       <li><%= customer.when_joined %></li>
       <li><%= customer.nick.empty? ? "(null)" : customer.nick %></li>
       <li><%= customer.tel %></li>
+      <li><%= Order.where(:who_id=>customer.id).sum("sum") %></li>
       <li><%= customer.email.empty? ? "(null)" : customer.email %></li>
       <li><%= customer.wechat.empty? ? "(null)" : customer.wechat %></li>
       <li><%= customer.weibo.empty? ? "(null)" : customer.weibo %></li>

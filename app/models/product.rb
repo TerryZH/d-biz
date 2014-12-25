@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
                 :made => made.round(2),
                 :sold => sold.round(2),
                 :left => (made-sold).round(2),
-                :prio => made==sold ? nil : (sold/(sold+magic_num)/(made-sold)*10000).round,
+                :prio => made==sold ? nil : (sold/(sold+magic_num)/(made-sold)*2500).round,
             }
         end
         return storages

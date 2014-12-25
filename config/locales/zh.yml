@@ -91,6 +91,7 @@ zh:
         nick: "昵称"
         address: "地址"
         tel: "电话"
+        sum: "订购金额"
         email: "电子邮件"
         wechat: "微信"
         weibo: "微博"
