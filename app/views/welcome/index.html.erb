@@ -16,12 +16,14 @@
   <li><%= I18n.t 'views.welcome.index.preferences.product' %></li>
   <li><%= I18n.t 'views.welcome.index.preferences.historical' %></li>
   <li><%= I18n.t 'views.welcome.index.preferences.last_order' %></li>
+  <li><%= I18n.t 'views.welcome.index.left' %></li>
 </ul>
 <% @products.each do |p| %>
   <ul>
     <li><%= p[0] %></li>
     <li class="preferences_historical_<%= p[1] %>"> - </li>
     <li class="preferences_last_order_<%= p[1] %>"> - </li>
+    <li class="product_storage_<%= p[1] %>"> - </li>
   </ul>
 <%end%>
 </div>
@@ -133,10 +135,10 @@
 </ul>
 <% @storages.each do |s| %>
 <ul>
-  <li><%= s[:product] %></li>
+  <li>id:<%= s[:product_id] %> - <%= Product.where(:id=>s[:product_id]).first.name %></li>
   <li><%= s[:made] %></li>
   <li><%= s[:sold] %></li>
-  <li><%= s[:left] %></li>
+  <li><%= s[:made]-s[:sold] %></li>
   <li><%= s[:prio] %></li>
 </ul>
 <%end%>

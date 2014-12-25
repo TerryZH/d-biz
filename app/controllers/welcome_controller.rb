@@ -44,9 +44,7 @@ class WelcomeController < ApplicationController
     end
 
     def find_customer_details
-        addresses = Customer.find_address_per_tel(params[:tel])
-        preferences = Customer.find_preference_per_tel(params[:tel])
-        details = { :address => addresses, :preference => preferences }
+        details = { :address => Customer.find_address_per_tel(params[:tel]), :preference => Customer.find_preference_per_tel(params[:tel]), :storage => Product.get_storages }
         respond_with details
     end
 end

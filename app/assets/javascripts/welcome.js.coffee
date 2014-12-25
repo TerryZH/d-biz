@@ -78,18 +78,21 @@ $ ->
       $("#address_list")[0].innerHTML = address_list
 
     handle_preferences_historical = (intermediate_id, historical_preferences) ->
-      $("#"+intermediate_id+" .preferences_historical_"+p.product_id+"")[0].innerHTML = p.product_number for p in historical_preferences
+      $("#"+intermediate_id+" .preferences_historical_"+p.product_id)[0].innerHTML = p.product_number for p in historical_preferences
 
     handle_preferences_last_order = (intermediate_id, last_order_preferences) ->
-      $("#"+intermediate_id+" .preferences_last_order_"+p.product_id+"")[0].innerHTML = p.product_number for p in last_order_preferences
+      $("#"+intermediate_id+" .preferences_last_order_"+p.product_id)[0].innerHTML = p.product_number for p in last_order_preferences
 
-    handle_preferences = (preferences) ->
+    handle_storages = (intermediate_id, storages) ->
+      $("#"+intermediate_id+" .product_storage_"+p.product_id)[0].innerHTML = (p.made-p.sold) for p in storages
+
+    handle_preferences = (preferences, storages, intermediate_id, template_id) ->
       if preferences.historical.length || preferences.last_order.length
-        intermediate_id = "preference_table_intermediate"
-        newItem = $("#preference_table_template").clone().attr("id",intermediate_id)
-        $("#preference_table_template").before(newItem)
+        newItem = $("#"+template_id).clone().attr("id",intermediate_id)
+        $("#"+template_id).before(newItem)
         handle_preferences_historical(intermediate_id, preferences.historical)
         handle_preferences_last_order(intermediate_id, preferences.last_order)
+        handle_storages(intermediate_id, storages)
         preference_table = $("#"+intermediate_id)[0].innerHTML
         $("#"+intermediate_id).remove()
       else
@@ -98,7 +101,7 @@ $ ->
 
     ajax_on_suc = (json) ->
       handle_addresses(json.address)
-      handle_preferences(json.preference)
+      handle_preferences(json.preference, json.storage, "preference_table_intermediate", "preference_table_template")
 
     ajax_on_err = (XMLHttpRequest, textStatus, errorThrown) ->
       alert(textStatus)
