@@ -1,5 +1,13 @@
 <div class="d-table">
 
+<% if @orders.empty? %>
+
+<div id="order_not_found">
+  <label><%= I18n.t 'views.orders.index.not_found' %></label>
+</div>
+
+<% else %>
+
 <ul class="th">
   <li><%= I18n.t 'views.orders.index.when' %></li>
   <li><%= I18n.t 'views.orders.index.who' %></li>
@@ -8,22 +16,20 @@
   <li></li>
 </ul>
 
-<% unless @orders.empty? %>
+<% @orders.each do |order| %>
+<ul>
+  <li><%= order.when %></li>
+  <li><%= link_to Customer.find(order.who_id).tel, {:controller=>"customers", :action=>"index",:tel=>Customer.find(order.who_id).tel} %></li>
+  <li><%= order.sum %></li>
+  <li><%= link_to I18n.t('views.details'), {:controller=>"items", :action=>"index",:id=>order} %></li>
+  <li><%= link_to I18n.t('views.edit'), "#" %></li>
+</ul>
+<% end %>
 
-  <% @orders.each do |order| %>
-    <ul>
-      <li><%= order.when %></li>
-      <li><%= link_to Customer.find(order.who_id).tel, {:controller=>"customers", :action=>"index",:tel=>Customer.find(order.who_id).tel} %></li>
-      <li><%= order.sum %></li>
-      <li><%= link_to I18n.t('views.details'), {:controller=>"items", :action=>"index",:id=>order} %></li>
-      <li><%= link_to I18n.t('views.edit'), "#" %></li>
-    </ul>
-  <% end %>
+<%= paginate @orders %>
 
 <% end %>
 
 </div>
-
-<%= paginate @orders %>
 
 

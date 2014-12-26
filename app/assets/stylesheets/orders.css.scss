@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:500px;
+$tab_width:40em;
 $col_width:20%;
 
 #order_list, #create_new_order {
@@ -16,4 +16,29 @@ $col_width:20%;
 
 #order_sum {
   font-size:12px;
+}
+
+#preference_table {
+  height:auto;
+  div {
+    margin:auto;
+    padding:1.5em;
+    width:88%;
+    ul li {
+      font-size:10px;
+      text-indent:0;
+      width:25%
+    }
+  }
+}
+
+.grey_tab {
+  font-size:10px;
+  text-align:center;
+  color:grey;
+  height:auto;
+}
+
+#order_sum {
+  width:25em;
 }

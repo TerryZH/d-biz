@@ -1,11 +1,13 @@
 class OrdersController < ApplicationController
     def index
-        if params[:id]
-            @orders = Order.where(:who_id=>params[:id]).order('created_at DESC').page(params[:page]).per(5)
-        else
+        if params[:c_id].blank?
             @orders = Order.all.order('created_at DESC').page(params[:page]).per(5)
+            @summary = (I18n.t 'views.orders.index.summary') % {:count=>Order.all.count, :sum=>Order.sum("sum")}
+        else
+            @orders = Order.where(:who_id=>params[:c_id]).order('created_at DESC').page(params[:page]).per(5)
+            @products = Product.all.collect {|p| [ p.name, p.id ] }
+            @cos_url = url_for :controller => "customers", :action => "details", :id=>params[:c_id], :format => "json"
         end
-        @summary = (I18n.t 'views.orders.index.summary') % {:count=>Order.all.count, :sum=>Order.sum("sum")}
     end
     
     def create

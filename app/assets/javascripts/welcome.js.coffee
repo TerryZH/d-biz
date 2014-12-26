@@ -64,53 +64,7 @@ $ ->
 
 # find address per tel #
   $("#new_order_tel").keyup ->
-    findCustDetailsPerTel($("#find_customer_details_url")[0].innerHTML, $("#new_order_tel")[0].value, "_tel_ph_")
-
-  findCustDetailsPerTel = (url_template, tel_number, tel_placeholder) ->
-    url = url_template.replace(eval("/"+tel_placeholder+"/g"),tel_number)
-
-    handle_addresses = (addresses) ->
-      if addresses.length
-        address_list = ""
-        address_list += "<div>" + a.location + "</div>" for a in addresses
-      else
-        address_list = $("#no_address_for_current_tel")[0].innerHTML
-      $("#address_list")[0].innerHTML = address_list
-
-    handle_preferences_historical = (intermediate_id, historical_preferences) ->
-      $("#"+intermediate_id+" .preferences_historical_"+p.product_id)[0].innerHTML = p.product_number for p in historical_preferences
-
-    handle_preferences_last_order = (intermediate_id, last_order_preferences) ->
-      $("#"+intermediate_id+" .preferences_last_order_"+p.product_id)[0].innerHTML = p.product_number for p in last_order_preferences
-
-    handle_storages = (intermediate_id, storages) ->
-      $("#"+intermediate_id+" .product_storage_"+p.product_id)[0].innerHTML = (p.made-p.sold) for p in storages
-
-    handle_preferences = (preferences, storages, intermediate_id, template_id) ->
-      if preferences.historical.length || preferences.last_order.length
-        newItem = $("#"+template_id).clone().attr("id",intermediate_id)
-        $("#"+template_id).before(newItem)
-        handle_preferences_historical(intermediate_id, preferences.historical)
-        handle_preferences_last_order(intermediate_id, preferences.last_order)
-        handle_storages(intermediate_id, storages)
-        preference_table = $("#"+intermediate_id)[0].innerHTML
-        $("#"+intermediate_id).remove()
-      else
-        preference_table = $("#no_preference_for_current_tel")[0].innerHTML
-      $("#preference_table")[0].innerHTML = preference_table
-
-    ajax_on_suc = (json) ->
-      handle_addresses(json.address)
-      handle_preferences(json.preference, json.storage, "preference_table_intermediate", "preference_table_template")
-
-    ajax_on_err = (XMLHttpRequest, textStatus, errorThrown) ->
-      alert(textStatus)
-
-    $.ajax({
-      type: "GET",
-      dataType: "text json",
-      url: url,
-      success: ajax_on_suc,
-      error: ajax_on_err
-    })
-
+    url_template=$("#cos_url")[0].innerHTML
+    tel_number=$("#new_order_tel")[0].value
+    tel_placeholder="_tel_ph_"
+    $.fn.getCustomerOrderSummary(url_template.replace(eval("/"+tel_placeholder+"/g"),tel_number))

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
-  get 'welcome/find_customer_details'
   post 'welcome/index' => 'welcome#create_new_order'
 
   get 'customers/index'
   get 'customers/delete'
+  get 'customers/details'
   post 'customers/index' => 'customers#create'
 
   get 'materials/index'

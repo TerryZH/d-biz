@@ -7,5 +7,16 @@
 <div class="padding" ></div>
 
 <div id="order_sum">
+  <% if params[:c_id].blank? %>
   <label><%= @summary %></label>
+  <%else%>
+  <ul class="th">
+    <li><%= link_to I18n.t('views.orders.index.show'), "#", :id=>"show_order_summary_by_user" %></li>
+    <li><%= link_to I18n.t('views.orders.index.hide'), "#", :id=>"hide_order_summary_by_user" %></li>
+  </ul>
+  <div id="cos_url" hidden="true">
+    <%= @cos_url %>
+  </div>
+  <%= render :partial => 'cos'%>
+  <%end%>
 </div>

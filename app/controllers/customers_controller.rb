@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
     def index
-        if params[:tel]
+        unless params[:tel].blank?
             @customers = Customer.where(:tel=>params[:tel]).order('created_at DESC').page(params[:page]).per(5)
         else
             @customers = Customer.all.order('created_at DESC').page(params[:page]).per(5)
@@ -19,6 +19,21 @@ class CustomersController < ApplicationController
     def delete
         Customer.destroy(params[:id])
         redirect_to :action => 'index'
+    end
+    
+    respond_to :html, :xml, :json
+    def details
+        cods = { :address => [], :preference => { :historical => [], :last_order => [] }, :storage => [] }
+        
+        unless params[:id].blank?
+          cods = { :address => Customer.find_address_by_id(params[:id]), :preference => Customer.find_preference_by_id(params[:id]), :storage => Product.get_storages }
+        end
+        
+        unless params[:tel].blank?
+          cods = { :address => Customer.find_address_by_tel(params[:tel]), :preference => Customer.find_preference_by_tel(params[:tel]), :storage => Product.get_storages }
+        end
+        
+        respond_with cods
     end
     
     private

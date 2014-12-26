@@ -41,12 +41,6 @@ zh:
         lastorder: "最近一个订单总金额%{price}，备零%{change}。详情如下："
         iocomp: "投入资金%{input}元（物料%{input_m}元＋促销%{input_p}元），回收资金%{output}元。现金流%{cashflow}元。"
         add_new_order_item: "（点击此处增加新项目）"
-        no_address_for_current_tel: "（暂无对应此电话号码的送货地址）"
-        no_preference_for_current_tel: "（暂无对应此电话号码的订货记录）"
-        preferences:
-          product: "产品"
-          historical: "历史订单"
-          last_order: "上次订单"
     pagination:
       first: "&laquo; 首页"
       last: "末页 &raquo;"
@@ -79,6 +73,16 @@ zh:
         when: "订单日期"
         who: "客户"
         sum: "订单总金额"
+        hide: "隐藏订单汇总"
+        show: "显示订单汇总"
+        not_found: "未找到符合条件的订单"
+      summary_by_customer:
+        no_address: "（暂无对应此电话号码的送货地址）"
+        no_preference: "（暂无对应此电话号码的订货记录）"
+        preferences:
+          product: "产品"
+          historical: "历史订单"
+          last_order: "上次订单"
     items:
       index:
         title: "订单详情"

@@ -1,7 +1,7 @@
 class MaterialsController < ApplicationController
   def index
     @materials = Material.all.order('created_at DESC').page(params[:page]).per(5)
-    @summary = (I18n.t 'views.materials.index.summary') % {:count=>Material.all.count, :sum=>Material.sum("sum")}
+    @summary = (I18n.t 'views.materials.index.summary') % {:count=>Material.all.count, :sum=>Material.sum("sum").round(2)}
   end
 
   def create
