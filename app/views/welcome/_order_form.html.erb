@@ -1,3 +1,4 @@
+<div id="order_form">
   <%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
   <%= f.hidden_field :item_count, :value => 1 %>
   <ul class="th">
@@ -47,3 +48,4 @@
   </ul>
   <% end %>
   <div id="text_out_of_storage" hidden="true"><%= I18n.t 'views.welcome.index.out_of_storage' %></div>
+</div>

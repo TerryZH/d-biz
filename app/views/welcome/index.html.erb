@@ -7,15 +7,11 @@
 
   <div class="padding" ></div>
 
-  <div>
-    <label><%= @lastorder %></label>
-  </div>
+  <div><%= @lastorder %></div>
 
   <div class="padding" ></div>
 
-  <div>
-    <%= render :partial => 'items/list'%>
-  </div>
+  <%= render :partial => 'items/list'%>
 
 </div>
 
@@ -23,18 +19,23 @@
 
 <div class="information">
 
-<%= render :partial => 'profit_form'%>
+  <%= render :partial => 'profit_form'%>
 
-<div class="padding" ></div>
+  <div class="padding" ></div>
 
-<%= render :partial => 'storage_form'%>
+  <div><%= @iocomp %></div>
 
-<div class="padding" ></div>
+  <div class="padding" ></div>
 
-<div>
-<%= @iocomp %>
+  <%= render :partial => 'storage_form'%>
+
 </div>
 
-<div class="padding" ></div>
+<div class="h-padding" ></div>
 
-<%= render :partial => 'debug'%>
+<div class="debug">
+
+  <%= render :partial => 'debug'%>
+
+</div>
+

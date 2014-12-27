@@ -7,11 +7,11 @@ class Order < ActiveRecord::Base
       range.each { |i| valid_order ||= (params[:new_order][("number_sn_"+i.to_s).to_sym].to_f != 0) }
       
       if valid_order
-          addr = params[:new_order][:neighbourhood] \
-          + params[:new_order][:district] \
-          + params[:new_order][:building] \
-          + params[:new_order][:unit] \
-          + params[:new_order][:floor] \
+          addr = params[:new_order][:neighbourhood] + "-" \
+          + params[:new_order][:district] + "-" \
+          + params[:new_order][:building] + "-" \
+          + params[:new_order][:unit] + "-" \
+          + params[:new_order][:floor] + "-" \
           + params[:new_order][:room]
           c = Customer.find_by_tel(params[:new_order][:tel]) ||
           Customer.create(:when_joined => Date.today,
@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
                           :wechat => "",
                           :weibo => "")
           a = Address.find_by_location(addr) ||
-              Address.create(:region => "北京市朝阳区管庄乡",
+              Address.create(:region => "北京市--朝阳区-管庄乡",
                              :location => addr)
           o = Order.create(:when => Date.today,
                            :who_id => c.id,
