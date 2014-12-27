@@ -1,0 +1,49 @@
+  <%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
+  <%= f.hidden_field :item_count, :value => 1 %>
+  <ul class="th">
+    <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
+  </ul>
+  <div id="cos_url" hidden="true">
+    <%= url_for :controller => "customers", :action => "details", :tel=>"_tel_ph_", :format => "json" %>
+  </div>
+  <%= render :partial => 'orders/cos'%>
+  <ul class="th">
+    <li><%= I18n.t 'views.welcome.index.addr' %></li>
+  </ul>
+  <ul id="address_detail">
+    <li>
+      <%= f.select :neighbourhood, @neighbourhoods %>
+      <%= f.select :district, @districts %>
+    </li>
+    <li>
+      <%= f.select :building, @buildings %>
+      <%= f.select :unit, @units %>
+    </li>
+    <li>
+      <%= f.select :floor, @floors%>
+      <%= f.select :room, @rooms %>
+    </li>
+  </ul>
+  <ul class="th">
+    <li><%= I18n.t 'views.welcome.index.details' %></li>
+  </ul>
+  <ul class="order_item" id="order_item_template">
+    <li>
+      <%= f.select :product_sn_0, @products %>
+      <%= f.select :number_sn_0, @numbers, {}, {:class => "select_item_number"} %>
+      <%= f.select :cooked_sn_0, @cooked %>
+      <%= I18n.t 'views.welcome.index.discount' %>
+      <%= f.text_field :discount_sn_0, :value => 0 %>
+    </li>
+  </ul>
+  <ul class="grey_tab" id="add_new_order_item">
+    <%= I18n.t 'views.welcome.index.add_new_order_item' %>
+  </ul>
+  <ul class="th" id="submit_cancel_tab">
+    <li>
+      <%= submit_tag I18n.t('views.submit') %>
+      <%= link_to I18n.t('views.cancel'), "#" %>
+    </li>
+  </ul>
+  <% end %>
+  <div id="text_out_of_storage"><%= I18n.t 'views.welcome.index.out_of_storage' %></div>

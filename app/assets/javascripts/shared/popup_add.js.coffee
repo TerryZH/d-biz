@@ -47,7 +47,7 @@ $ ->
  
     scrol_func = (kg) ->
       animate_resize = () ->
-        offsetTop = ($(window).height()- popDiv.height())/2 + $(window).scrollTop() +"px"
+        offsetTop = ($(window).height()-popDiv.height())/2 + $(window).scrollTop() + "px"
         popDiv.animate({top:offsetTop},{duration:380 , queue:false })
       if kg!="off"
         $(window).bind("scroll.popWin"+popDiv.attr("id"), animate_resize)

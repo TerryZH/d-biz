@@ -1,0 +1,25 @@
+<div id="storage_trend">
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.product' %></li>
+  <li><%= I18n.t 'views.welcome.index.made' %></li>
+  <li><%= I18n.t 'views.welcome.index.sold' %></li>
+  <li><%= I18n.t 'views.welcome.index.left' %></li>
+  <li><%= I18n.t 'views.welcome.index.prio' %></li>
+</ul>
+<% @storages.each do |s| %>
+<ul>
+  <li>id:<%= s[:product_id] %> - <%= Product.where(:id=>s[:product_id]).first.name %></li>
+  <li><%= s[:made] %></li>
+  <li><%= s[:sold] %></li>
+  <li id="storage_of_pid_<%= s[:product_id] %>" ><%= s[:made]-s[:sold] %></li>
+  <li><%= s[:prio] %></li>
+</ul>
+<%end%>
+<ul class="th" >
+  <li><%= I18n.t 'views.welcome.index.summary' %></li>
+  <li><%= @made_total %></li>
+  <li><%= @sold_total %></li>
+  <li><%= @left_total %></li>
+  <li></li>
+</ul>
+</div>

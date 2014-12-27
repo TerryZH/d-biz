@@ -3,54 +3,7 @@
 
 <div class="input">
 
-  <%= form_for :new_order, :html=>{:id=>"create-new-order"} do |f| %>
-  <%= f.hidden_field :item_count, :value => 1 %>
-  <ul class="th">
-    <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
-  </ul>
-  <div id="cos_url" hidden="true">
-    <%= url_for :controller => "customers", :action => "details", :tel=>"_tel_ph_", :format => "json" %>
-  </div>
-  <%= render :partial => 'orders/cos'%>
-  <ul class="th">
-    <li><%= I18n.t 'views.welcome.index.addr' %></li>
-  </ul>
-  <ul id="address_detail">
-    <li>
-      <%= f.select :neighbourhood, @neighbourhoods %>
-      <%= f.select :district, @districts %>
-    </li>
-    <li>
-      <%= f.select :building, @buildings %>
-      <%= f.select :unit, @units %>
-    </li>
-    <li>
-      <%= f.select :floor, @floors%>
-      <%= f.select :room, @rooms %>
-    </li>
-  </ul>
-  <ul class="th">
-    <li><%= I18n.t 'views.welcome.index.details' %></li>
-  </ul>
-  <ul class="order_item" id="order_item_template">
-    <li>
-      <%= f.select :product_sn_0, @products %>
-      <%= f.select :number_sn_0, @numbers %>
-      <%= f.select :cooked_sn_0, @cooked %>
-      <%= I18n.t 'views.welcome.index.discount' %>
-      <%= f.text_field :discount_sn_0, :value => 0 %>
-    </li>
-  </ul>
-  <ul class="grey_tab" id="add_new_order_item">
-    <%= I18n.t 'views.welcome.index.add_new_order_item' %>
-  </ul>
-  <ul class="th" id="submit_cancel_tab">
-    <li>
-      <%= submit_tag I18n.t 'views.submit', class: "closeWin" %>
-      <%= link_to I18n.t 'views.cancel', "#", class: "closeWin" %>
-    </li>
-  </ul>
-  <% end %>
+  <%= render :partial => 'order_form'%>
 
   <div class="padding" ></div>
 
@@ -69,57 +22,12 @@
 <div class="h-padding" ></div>
 
 <div class="information">
-<div id="profit_trend">
-<ul class="th" >
-  <li><%= I18n.t 'views.welcome.index.date' %></li>
-  <li><%= I18n.t 'views.welcome.index.amount' %></li>
-  <li><%= I18n.t 'views.welcome.index.profit' %></li>
-  <li><%= I18n.t 'views.welcome.index.profit_rate' %></li>
-</ul>
-<% @profits.each do |pt| %>
-<ul>
-  <li><%= pt.when %></li>
-  <li><%= pt.amount %></li>
-  <li><%= pt.profit %></li>
-  <li><%= (pt.profit/pt.amount*100).round(2).to_s + " %" %></li>
-</ul>
-<%end%>
-<ul class="th" >
-  <li><%= I18n.t 'views.welcome.index.summary' %></li>
-  <li><%= @amount_total %></li>
-  <li><%= @profit_total %></li>
-  <li><%= (@profit_total/@amount_total*100).round(2).to_s + " %" %></li>
-</ul>
-<%= paginate @profits %>
-</div>
+
+<%= render :partial => 'profit_form'%>
 
 <div class="padding" ></div>
 
-<div id="storage_trend">
-<ul class="th" >
-  <li><%= I18n.t 'views.welcome.index.product' %></li>
-  <li><%= I18n.t 'views.welcome.index.made' %></li>
-  <li><%= I18n.t 'views.welcome.index.sold' %></li>
-  <li><%= I18n.t 'views.welcome.index.left' %></li>
-  <li><%= I18n.t 'views.welcome.index.prio' %></li>
-</ul>
-<% @storages.each do |s| %>
-<ul>
-  <li>id:<%= s[:product_id] %> - <%= Product.where(:id=>s[:product_id]).first.name %></li>
-  <li><%= s[:made] %></li>
-  <li><%= s[:sold] %></li>
-  <li><%= s[:made]-s[:sold] %></li>
-  <li><%= s[:prio] %></li>
-</ul>
-<%end%>
-<ul class="th" >
-  <li><%= I18n.t 'views.welcome.index.summary' %></li>
-  <li><%= @made_total %></li>
-  <li><%= @sold_total %></li>
-  <li><%= @left_total %></li>
-  <li></li>
-</ul>
-</div>
+<%= render :partial => 'storage_form'%>
 
 <div class="padding" ></div>
 
@@ -129,25 +37,4 @@
 
 <div class="padding" ></div>
 
-<div id="locale_debug" hidden="true">
-<p>
-<label>available locale --- <%= I18n.available_locales %></label>
-</p>
-<p>
-<label>default locale --- <%= I18n.default_locale %></label>
-</p>
-<p>
-<label>target locale --- <%= params[:locale] %></label>
-</p>
-<p>
-<label>decision --- <%= params[:locale] && (I18n.available_locales.include? params[:locale].to_sym) %></label>
-</p>
-<p>
-<label>current locale --- <%= I18n.locale %></label>
-</p>
-</div>
-
-<div hidden="true">
-<label id="txtPosition"> where am i? </label>
-</div>
-</div>
+<%= render :partial => 'debug'%>
