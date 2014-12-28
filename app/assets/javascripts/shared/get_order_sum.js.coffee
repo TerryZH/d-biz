@@ -4,9 +4,10 @@
 
 # define shared function getCustomerOrderSummary
 $ ->
-  $.fn.getCustomerOrderSummary = (url) ->
+  $.fn.getCustomerOrderSummary = (url, found_addr_cb, found_pref_cb) ->
     handle_addresses = (addresses) ->
       if addresses.length
+        found_addr_cb(addresses) if found_addr_cb
         address_list = ""
         address_list += "<div>" + a.location + "</div>" for a in addresses
       else
@@ -25,6 +26,7 @@ $ ->
 
     handle_preferences = (preferences, storages, intermediate_id, template_id) ->
       if preferences.historical.length || preferences.last_order.length
+        found_pref_cb() if found_pref_cb
         newItem = $("#"+template_id).clone().attr("id",intermediate_id)
         $("#"+template_id).before(newItem)
         handle_preferences_historical(intermediate_id, preferences.historical)

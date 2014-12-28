@@ -18,7 +18,21 @@ $ ->
     url_template=$("#cos_url")[0].innerHTML
     tel_number=$("#new_order_tel")[0].value
     tel_placeholder="_tel_ph_"
-    $.fn.getCustomerOrderSummary(url_template.replace(tel_placeholder,tel_number))
+    url=url_template.replace(tel_placeholder,tel_number)
+    update_addr_section=(addresses) ->
+      if addresses && addresses.length>0
+        addr=addresses
+      else
+        addr=[{"id":0,"region":"北京市--朝阳区-管庄乡","location":"北京新天地--1号楼--1-01","created_at":"","updated_at":""}]
+      loc=addr[0].location.split('-')
+      $("#new_order_neighbourhood").val(loc[0])
+      $("#new_order_district").val(loc[1])
+      $("#new_order_building").val(loc[2])
+      $("#new_order_unit").val(loc[3])
+      $("#new_order_floor").val(loc[4])
+      $("#new_order_room").val(loc[5])
+    update_addr_section()
+    $.fn.getCustomerOrderSummary(url, update_addr_section)
 
 # check storage when selecting number for items
   $(".select_item_number").change ->
@@ -40,6 +54,12 @@ $ ->
     if demandNum > supplyNum
       alert $("#text_out_of_storage")[0].innerHTML.format(supplyNum)
 
+# change style on debug mode
+  if $("#debug_section").is(":visible")
+    $("ul").css("border","1px solid #CC9900")
+    $("ul").css("border-top","0px")
+    $(".th").css("background","#FAF1DE")
+    $(".th").css("border-top","1px solid #CC9900")
 
 
 
