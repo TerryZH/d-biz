@@ -8,19 +8,30 @@
 </head>
 <body>
 
-<div id="header">
-  <%= link_to I18n.t('views.welcome.index.title'), controller: 'welcome' %>
-  <%= link_to I18n.t('views.materials.index.title'), controller: 'materials' %>
-  <%= link_to I18n.t('views.productions.index.title'), controller: 'productions' %>
-  <%= link_to I18n.t('views.promotions.index.title'), controller: 'promotions' %>
-  <%= link_to I18n.t('views.orders.index.title'), controller: 'orders' %>
-  <%= link_to I18n.t('views.customers.index.title'), controller: 'customers' %>
-</div>
-
 <%= javascript_include_tag params[:controller] %>
 <%= stylesheet_link_tag params[:controller] %>
 
-<%= yield %>
+<div class="debug">
+  <%= render :partial => 'debug'%>
+</div>
+
+<div class="padding" ></div>
+
+<div class="content">
+  <div class="header">
+    <%= link_to I18n.t('views.welcome.index.title'), controller: 'welcome' %>
+    <%= link_to I18n.t('views.materials.index.title'), controller: 'materials' %>
+    <%= link_to I18n.t('views.productions.index.title'), controller: 'productions' %>
+    <%= link_to I18n.t('views.promotions.index.title'), controller: 'promotions' %>
+    <%= link_to I18n.t('views.orders.index.title'), controller: 'orders' %>
+    <%= link_to I18n.t('views.customers.index.title'), controller: 'customers' %>
+  </div>
+  <div class="body">
+    <%= yield %>
+  </div>
+  <div class="footer">
+  </div>
+</div>
 
 </body>
 </html>

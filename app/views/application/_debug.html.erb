@@ -1,4 +1,4 @@
-<div id="debug_section"<%if @debug_mode_off %> hidden="true"<%end%>>
+<div id="debug_section"<%if Rails.env=="production" %> hidden="true"<%end%>>
 <div>
 If you see this, you are in debug(non-production) mode.
 </div>

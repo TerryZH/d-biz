@@ -54,13 +54,4 @@ $ ->
     if demandNum > supplyNum
       alert $("#text_out_of_storage")[0].innerHTML.format(supplyNum)
 
-# change style on debug mode
-  if $("#debug_section").is(":visible")
-    $("ul").css("border","1px solid #CC9900")
-    $("ul").css("border-top","0px")
-    $(".th").css("background","#FAF1DE")
-    $(".th").css("border-top","1px solid #CC9900")
-
-
-
 
