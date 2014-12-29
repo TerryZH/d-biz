@@ -10,27 +10,31 @@ class CustomersController < ApplicationController
     
     def create
         if Customer.create(customer_params).valid?
-            redirect_to :action => 'index'
+            redirect_to :action=>'index'
         else
-            render :text => "something wrong", :status => 500
+            render :text=>"something wrong", :status=>500
         end
     end
     
     def delete
         Customer.destroy(params[:id])
-        redirect_to :action => 'index'
+        redirect_to :action=>'index'
     end
     
     respond_to :html, :xml, :json
     def details
-        cods = { :address => [], :preference => { :historical => [], :last_order => [] }, :storage => [] }
+        cods = { :customer=>nil, :address=>[], :preference=>{ :historical=>[], :last_order=>[] }, :storage=>[] }
         
         unless params[:id].blank?
-          cods = { :address => Customer.find_address_by_id(params[:id]), :preference => Customer.find_preference_by_id(params[:id]), :storage => Product.get_storages }
+          cods = { :customer=>Customer.find_by_id(params[:id]), :address=>Customer.find_address_by_id(params[:id]), :preference=>Customer.find_preference_by_id(params[:id]), :storage=>Product.get_storages }
         end
         
         unless params[:tel].blank?
-          cods = { :address => Customer.find_address_by_tel(params[:tel]), :preference => Customer.find_preference_by_tel(params[:tel]), :storage => Product.get_storages }
+          cods = { :customer=>Customer.find_by_tel(params[:tel]), :address=>Customer.find_address_by_tel(params[:tel]), :preference=>Customer.find_preference_by_tel(params[:tel]), :storage=>Product.get_storages }
+        end
+        
+        unless params[:region].blank? and params[:location].blank?
+          cods = { :customer=>Customer.find_by_addr(params[:location], params[:region]), :address=>Customer.find_address_by_addr(params[:location], params[:region]), :preference=>Customer.find_preference_by_addr(params[:location], params[:region]), :storage=>Product.get_storages }
         end
         
         respond_with cods

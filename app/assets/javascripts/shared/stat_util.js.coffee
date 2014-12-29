@@ -33,5 +33,6 @@ $ ->
   $("#product_lc_per_day").keyup ->
     updateProductCost()
 
-  updateFlierCost()
-  updateProductCost()
+  if( $("#statistic_form").length )
+    updateFlierCost()
+    updateProductCost()

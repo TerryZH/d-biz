@@ -4,9 +4,9 @@
 
 # define shared function getCustomerOrderSummary
 $ ->
-  $.fn.getCustomerOrderSummary = (url, found_addr_cb, found_pref_cb) ->
+  $.fn.getCustomerOrderSummary = (url, found_addr_cb, found_pref_cb, found_customer_cb) ->
     handle_addresses = (addresses) ->
-      if addresses.length
+      if addresses && addresses.length
         found_addr_cb(addresses) if found_addr_cb
         address_list = ""
         address_list += "<div>" + a.location + "</div>" for a in addresses
@@ -25,7 +25,7 @@ $ ->
       $("#"+intermediate_id+" .product_storage_"+p.product_id)[0].innerHTML = (p.made-p.sold) for p in storages
 
     handle_preferences = (preferences, storages, intermediate_id, template_id) ->
-      if preferences.historical.length || preferences.last_order.length
+      if preferences && (preferences.historical.length||preferences.last_order.length)
         found_pref_cb() if found_pref_cb
         newItem = $("#"+template_id).clone().attr("id",intermediate_id)
         $("#"+template_id).before(newItem)
@@ -40,6 +40,8 @@ $ ->
       $("#preference_table")[0].innerHTML = preference_table
 
     ajax_on_suc = (json) ->
+      if json && json.customer
+        found_customer_cb(json.customer) if found_customer_cb
       handle_addresses(json.address)
       handle_preferences(json.preference, json.storage, "preference_table_intermediate", "preference_table_template")
 

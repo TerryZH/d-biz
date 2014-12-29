@@ -34,6 +34,20 @@ $ ->
     update_addr_section()
     $.fn.getCustomerOrderSummary(url, update_addr_section)
 
+# find tel # per address
+  $("#address_detail select").change ->
+    url_template=$("#cos_url")[0].innerHTML
+    param_list="region=&location="+$("#new_order_neighbourhood").val()+"-"+$("#new_order_district").val()+"-"+$("#new_order_building").val()+"-"+$("#new_order_unit").val()+"-"+$("#new_order_floor").val()+"-"+$("#new_order_room").val()
+    param_placeholder="tel=_tel_ph_"
+    url=url_template.replace(param_placeholder,param_list)
+    update_tel=(customer) ->
+      if customer and customer.tel
+        $("#new_order_tel").val(customer.tel)
+      else
+        $("#new_order_tel").val("")
+    update_tel()
+    $.fn.getCustomerOrderSummary(url, null, null, update_tel)
+
 # check storage when selecting number for items
   $(".select_item_number").change ->
     checkStorage()
