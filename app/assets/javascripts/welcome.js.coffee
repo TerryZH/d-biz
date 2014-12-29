@@ -20,6 +20,8 @@ $ ->
     tel_placeholder="_tel_ph_"
     url=url_template.replace(tel_placeholder,tel_number)
     update_addr_section=(addresses) ->
+      for index, select_control of $("#address_detail select")
+        return if select_control.selectedIndex
       if addresses && addresses.length>0
         addr=addresses
       else
@@ -31,8 +33,7 @@ $ ->
       $("#new_order_unit").val(loc[3])
       $("#new_order_floor").val(loc[4])
       $("#new_order_room").val(loc[5])
-    update_addr_section()
-    $.fn.getCustomerOrderSummary(url, update_addr_section)
+    COSUtil.getCustomerOrderSummary(url, update_addr_section)
 
 # find tel # per address
   $("#address_detail select").change ->
@@ -41,12 +42,13 @@ $ ->
     param_placeholder="tel=_tel_ph_"
     url=url_template.replace(param_placeholder,param_list)
     update_tel=(customer) ->
+      if $("#new_order_tel").val().length
+        return
       if customer and customer.tel
         $("#new_order_tel").val(customer.tel)
       else
         $("#new_order_tel").val("")
-    update_tel()
-    $.fn.getCustomerOrderSummary(url, null, null, update_tel)
+    COSUtil.getCustomerOrderSummary(url, null, null, update_tel)
 
 # check storage when selecting number for items
   $(".select_item_number").change ->
@@ -56,16 +58,35 @@ $ ->
     itemCount=$("#new_order_item_count").attr("value")
     items=HashMap.createNew()
     for i in [0...itemCount]
-      k=$("#new_order_product_sn_"+i)[0].value
+      k=$("#new_order_prod_sn_"+i)[0].value
       v=eval($("#new_order_number_sn_"+i)[0].value)
       items.add(k,v)
 
     evt=e||window.event
     eventSrc=evt.target||evt.srcElement
-    p_id=$("#"+eventSrc.id.replace("number","product"))[0].value
+    p_id=$("#"+eventSrc.id.replace("number","prod"))[0].value
     demandNum=items.get(p_id)
     supplyNum=eval($("#storage_of_pid_"+p_id)[0].innerHTML)
     if demandNum > supplyNum
       alert $("#text_out_of_storage")[0].innerHTML.format(supplyNum)
+
+# update profit estimation when cost changed
+  $("#prom_p_day").keyup ->
+    StatUtil.onPromCostChanged()
+  $("#prom_lc_p_day").keyup ->
+    StatUtil.onPromCostChanged()
+  $("#prod_p_day").keyup ->
+    StatUtil.onProdCostChanged()
+  $("#prod_lc_p_day").keyup ->
+    StatUtil.onProdCostChanged()
+  $("#rt_p_mon").keyup ->
+    StatUtil.onFixedCostChanged()
+  $("#oh_p_mon").keyup ->
+    StatUtil.onFixedCostChanged()
+
+# get location from web
+  $("#txtPosition").click ->
+    LocationUtil.getLocation()
+
 
 

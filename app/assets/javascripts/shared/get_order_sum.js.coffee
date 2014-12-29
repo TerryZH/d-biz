@@ -4,7 +4,8 @@
 
 # define shared function getCustomerOrderSummary
 $ ->
-  $.fn.getCustomerOrderSummary = (url, found_addr_cb, found_pref_cb, found_customer_cb) ->
+  window.COSUtil = {
+  getCustomerOrderSummary: (url, found_addr_cb, found_pref_cb, found_customer_cb) ->
     handle_addresses = (addresses) ->
       if addresses && addresses.length
         found_addr_cb(addresses) if found_addr_cb
@@ -55,3 +56,4 @@ $ ->
        success: ajax_on_suc,
        error: ajax_on_err
        })
+  }

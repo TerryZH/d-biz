@@ -6,7 +6,7 @@ $ ->
   showOrderSummary = () ->
     $("#show_order_summary_by_user").hide()
     $("#hide_order_summary_by_user").show()
-    $.fn.getCustomerOrderSummary($("#cos_url")[0].innerHTML)
+    getCustomerOrderSummary($("#cos_url")[0].innerHTML)
     $("#preference_table").show()
     $("#address_list").show()
 
