@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:40em;
+$tab_width:50em;
 $col_width:25%;
 
 #profit_trend {
@@ -24,6 +24,22 @@ $col_width:20%;
     width:$tab_width;
     li {
       width:$col_width;
+    }
+  }
+}
+
+$tab_width:50em;
+$col_width:50%;
+
+#statistic_form {
+  font-size:12px;
+  ul {
+    width:$tab_width;
+    li {
+      width:$col_width;
+      input {
+        width:24.9em
+      }
     }
   }
 }

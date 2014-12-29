@@ -1,0 +1,66 @@
+<div id="statistic_form">
+<ul class="th">
+<li/>
+<li/>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_per_day' %></li><li>
+            <%= text_field_tag :flier_per_day, 1200 %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_lc_per_day' %></li><li>
+            <%= text_field_tag :flier_lc_per_day, 90 %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_per_day' %></li><li>
+            <%= text_field_tag :product_per_day, 250 %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_lc_per_day' %></li><li>
+            <%= text_field_tag :product_lc_per_day, 100 %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.sum_per_order' %> </li>
+                        <li id="sum_per_order">
+                           <%= @sum_per_order=Order.average("sum").round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.revisit_rate' %> </li>
+                        <li id="revisit_rate">
+                           <%= @revisit_rate=number_to_percentage(100.0*Order.count()/Customer.count()-100, precision:2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.conversion_rate' %> </li>
+                        <li id="conversion_rate">
+                           <%= @conversion_rate=number_to_percentage(100.0*Customer.count()/Promotion.sum("number"), precision:2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_per_10k_revenue' %> </li>
+                        <li id="flier_per_10k_revenue">
+                           <%= @flier_per_10k_revenue=(10000.0*Promotion.sum("number")/Order.sum("sum")).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_mc_per_10k_revenue' %> </li>
+                        <li id="flier_mc_per_10k_revenue">
+                           <%= @flier_mc_per_10k_revenue=(10000.0*Promotion.sum("sum")/Order.sum("sum")).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_lc_per_10k_revenue' %> </li>
+                        <li id="flier_lc_per_10k_revenue">
+                           <%= @flier_lc_per_10k_revenue=(@flier_per_10k_revenue*90/1000).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.flier_cost_per_10k_revenue' %> </li>
+                        <li id="flier_cost_per_10k_revenue">
+                           <%= @flier_cost_per_10k_revenue=(@flier_lc_per_10k_revenue+@flier_mc_per_10k_revenue).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_per_10k_revenue' %> </li>
+                        <li id="product_per_10k_revenue">
+                           <%= @product_per_10k_revenue=(10000.0*Item.sum("number")/Order.sum("sum")).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_mc_per_10k_revenue' %> </li>
+                        <li id="product_mc_per_10k_revenue">
+                           <%= @product_mc_per_10k_revenue=(10000.0*(1-@profit_total/@amount_total)).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_lc_per_10k_revenue' %> </li>
+                        <li id="product_lc_per_10k_revenue">
+                           <%= @product_lc_per_10k_revenue=(@product_per_10k_revenue*100/250).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.product_cost_per_10k_revenue' %></li>
+                        <li id="product_cost_per_10k_revenue">
+                           <%= @product_cost_per_10k_revenue=(@product_lc_per_10k_revenue+@product_mc_per_10k_revenue).round(2) %></li>
+</ul><ul>
+<li><%= I18n.t 'views.statistic.cost_per_10k_revenue' %></li>
+                        <li id="cost_per_10k_revenue">
+                           <%= @cost_per_10k_revenue=(@product_cost_per_10k_revenue+@flier_cost_per_10k_revenue).round(2) %></li>
+</ul>
+</div>

@@ -1,6 +1,6 @@
 <div id="debug_section"<%if Rails.env=="production" %> hidden="true"<%end%>>
 <div>
-If you see this, you are in debug(non-production) mode.
+  <%= I18n.t 'views.debug.mode_reminder' %>
 </div>
 <div id="locale_debug" hidden="true">
   <p>

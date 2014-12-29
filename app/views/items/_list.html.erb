@@ -21,7 +21,7 @@
       <li><%= link_to I18n.t('views.edit'), "#" %></li>
     </ul>
     <% end %>
-    <ul> <%= (I18n.t 'views.items.index.delivery_to') % {:address=>a.region+a.location} %> </ul>
+    <ul> <%= (I18n.t 'views.items.index.delivery_to') % {:address=>a.region.gsub('-',"")+a.location.gsub('-',"")} %> </ul>
   <% end %>
 
 <% end %>

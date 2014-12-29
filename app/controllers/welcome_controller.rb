@@ -1,14 +1,8 @@
 class WelcomeController < ApplicationController
     def index
-        @profit_total=0
-        @amount_total=0
         Profit.refresh
-        Profit.all.each do |p|
-            @profit_total+=p.profit
-            @amount_total+=p.amount
-        end
-        @profit_total = @profit_total.round(2)
-        @amount_total = @amount_total.round(2)
+        @profit_total=Profit.sum("profit").round(2)
+        @amount_total=Profit.sum("amount").round(2)
         @profits = Profit.all.order('created_at DESC').page(params[:page]).per(5)
 
         @storages = Product.get_storages

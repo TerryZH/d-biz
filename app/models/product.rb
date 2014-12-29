@@ -7,6 +7,7 @@ class Product < ActiveRecord::Base
             sold = Item.where("product_id = ?", p.id).sum("number").round(2)
             storages.insert -1, {
                 :product_id => p.id,
+                :product_name => p.name,
                 :made => made,
                 :sold => sold,
                 :prio => made==sold ? nil : (sold/(sold+magic_num)/(made-sold)*2500).round,
