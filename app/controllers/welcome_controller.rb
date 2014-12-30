@@ -16,7 +16,15 @@ class WelcomeController < ApplicationController
         @items = Item.where(:order_id => o.id).group_by {|item| item.delivery_id}
         @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :change=>(110-o.sum).round(2), :phone=>Customer.find_by_id(o.who_id).tel}
         @iocomp = (I18n.t 'views.welcome.index.iocomp') % {:input=>(Promotion.sum("sum")+Material.sum("sum")).round(2), :input_p=>Promotion.sum("sum").round(2), :input_m=>Material.sum("sum").round(2), :output=>Order.sum("sum").round(2), :cashflow=>(Order.sum("sum")-Promotion.sum("sum")-Material.sum("sum")).round(2)}
-
+    end
+    
+    def version
+        render :partial => 'version', :layout => 'simple'
+    end
+    
+    def history
+        @change_history = `git log`.split("\n")
+        render :partial => 'history', :layout => 'simple'
     end
     
     def create_new_order
@@ -24,6 +32,7 @@ class WelcomeController < ApplicationController
         redirect_to :action => 'index'
     end
 
+    private
     def prepare_lists
         @neighbourhoods = [['北京新天地','北京新天地'],['京通苑','京通苑']];
         @districts = [['-',''],['1期','1期'],['2期','2期'],['3期','3期'],['4期','4期'],['5期','5期']];

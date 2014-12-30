@@ -1,0 +1,19 @@
+<%= render :partial => 'version'%>
+<p/>
+<div id="change_history">
+  <%= I18n.t 'views.debug.change_history' %>
+  <p/>
+  <% @change_history.each do |l| %>
+  <% if l[0]== ' ' %>
+    <div class="detail"><%= l %></div>
+  <% elsif l[0...6]== "Author" %>
+    <div class="author"><%= l %></div>
+  <% elsif l[0...4]== "Date" %>
+    <div class="date"><%= l %></div>
+  <% elsif l[0...6]== "commit" %>
+    <div class="title"><%= l %></div>
+  <% else %>
+    <div class="unknown"><%= l %></div>
+  <% end %>
+  <% end %>
+</div>

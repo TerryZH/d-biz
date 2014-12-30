@@ -1,0 +1,3 @@
+<div id="version">
+  <%= I18n.t 'views.debug.current_version' %> <%= `git log --oneline | sed -n -e '1p'`%>
+</div>

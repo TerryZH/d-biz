@@ -2,6 +2,7 @@
 <div>
   <%= I18n.t 'views.debug.mode_reminder' %>
 </div>
+<%= render :partial => 'version'%>
 <div id="locale_debug" hidden="true">
   <p>
     <label>available locale --- <%= I18n.available_locales %></label>

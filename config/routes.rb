@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
+  get 'version' => 'welcome#version'
+  get 'history' => 'welcome#history'
   post 'welcome/index' => 'welcome#create_new_order'
 
   get 'customers/index'
