@@ -2,7 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$tab_width:50em;
+.order {
+  width:28.5%;
+  float:left;
+}
+
+.history {
+  width:20%;
+  float:left;
+}
+
+.statistics {
+  width:46%;
+  float:left;
+}
+
+
+$tab_width:100%;
 $col_width:25%;
 
 #profit_trend {
@@ -15,7 +31,7 @@ $col_width:25%;
   }
 }
 
-$tab_width:50em;
+$tab_width:100%;
 $col_width:20%;
 
 #storage_trend {
@@ -28,7 +44,7 @@ $col_width:20%;
   }
 }
 
-$tab_width:50em;
+$tab_width:100%;
 $col_width:50%;
 
 #statistic_form {
@@ -38,7 +54,7 @@ $col_width:50%;
     li {
       width:$col_width;
       input {
-        width:24.9em
+        width:90%
       }
     }
   }
@@ -54,7 +70,7 @@ $col_width:50%;
   height:5em;
   li {
     float:none;
-    text-indent:4em;
+    text-indent:7em;
   }
   select {
     width:9.6em;

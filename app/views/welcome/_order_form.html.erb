@@ -4,10 +4,6 @@
   <ul class="th">
     <li><%= I18n.t 'views.welcome.index.tel' %><%= f.text_field :tel %> </li>
   </ul>
-  <div id="cos_url" hidden="true">
-    <%= url_for :controller => "customers", :action => "details", :tel=>"_tel_ph_", :format => "json" %>
-  </div>
-  <%= render :partial => 'orders/cos'%>
   <ul class="th">
     <li><%= I18n.t 'views.welcome.index.addr' %></li>
   </ul>

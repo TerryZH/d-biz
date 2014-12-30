@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
         
         o = Order.last
         @items = Item.where(:order_id => o.id).group_by {|item| item.delivery_id}
-        @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :change=>(110-o.sum).round(2)}
+        @lastorder = (I18n.t 'views.welcome.index.lastorder') % {:price=>o.sum, :change=>(110-o.sum).round(2), :phone=>Customer.find_by_id(o.who_id).tel}
         @iocomp = (I18n.t 'views.welcome.index.iocomp') % {:input=>(Promotion.sum("sum")+Material.sum("sum")).round(2), :input_p=>Promotion.sum("sum").round(2), :input_m=>Material.sum("sum").round(2), :output=>Order.sum("sum").round(2), :cashflow=>(Order.sum("sum")-Promotion.sum("sum")-Material.sum("sum")).round(2)}
 
     end

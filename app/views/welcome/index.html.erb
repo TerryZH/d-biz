@@ -1,7 +1,7 @@
 <h1><%= I18n.t 'views.welcome.index.title' %></h1>
 <p></p>
 
-<div class="input">
+<div class="order">
 
   <%= render :partial => 'order_form'%>
 
@@ -17,7 +17,21 @@
 
 <div class="h-padding" ></div>
 
-<div class="information">
+<div class="history">
+
+  <ul class="th">
+    <li><%= I18n.t('views.welcome.index.history') %></li>
+  </ul>
+  <div id="cos_url" hidden="true">
+    <%= url_for :controller => "customers", :action => "details", :tel=>"_tel_ph_", :format => "json" %>
+  </div>
+  <%= render :partial => 'orders/cos'%>
+
+</div>
+
+<div class="h-padding" ></div>
+
+<div class="statistics">
 
   <%= render :partial => 'profit_form'%>
 

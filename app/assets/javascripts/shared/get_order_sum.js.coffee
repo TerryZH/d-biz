@@ -10,7 +10,7 @@ $ ->
       if addresses && addresses.length
         found_addr_cb(addresses) if found_addr_cb
         address_list = ""
-        address_list += "<div>" + a.location + "</div>" for a in addresses
+        address_list += "<div>" + a.tel + " - " + a.location + "</div>" for a in addresses
       else
         address_list = $("#no_address")[0].innerHTML
 

@@ -19,11 +19,11 @@ $ ->
     __oh_p_mon = $("#"+oh_p_mon)[0].value.trim()|0
     __tr_p_mon = 10000.0*(__rt_p_mon+__oh_p_mon)/__gp_p_10k
 
-    $("#"+lc_p_10k)[0].innerHTML = __lc_p_10k
-    $("#"+cc_p_10k)[0].innerHTML = __cc_p_10k
-    $("#"+tc_p_10k)[0].innerHTML = __tc_p_10k
-    $("#"+gp_p_10k)[0].innerHTML = __gp_p_10k
-    $("#"+tr_p_mon)[0].innerHTML = __tr_p_mon
+    $("#"+lc_p_10k)[0].innerHTML = __lc_p_10k.toFixed(2)
+    $("#"+cc_p_10k)[0].innerHTML = __cc_p_10k.toFixed(2)
+    $("#"+tc_p_10k)[0].innerHTML = __tc_p_10k.toFixed(2)
+    $("#"+gp_p_10k)[0].innerHTML = __gp_p_10k.toFixed(2)
+    $("#"+tr_p_mon)[0].innerHTML = __tr_p_mon.toFixed(2)
 
   onPromCostChanged: () ->
     this.updateStat("prom_p_day", "prom_lc_p_day", "prom_p_10k", "prom_lc_p_10k", "prom_mc_p_10k", "prom_c_p_10k", "prod_c_p_10k", "cost_p_10k", "gprf_p_10k", "rt_p_mon", "oh_p_mon", "tr_p_mon")

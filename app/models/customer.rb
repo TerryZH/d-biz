@@ -9,11 +9,11 @@ class Customer < ActiveRecord::Base
   end
 
   def self.find_address_by_tel(tel)
-    return find_address_by_condition({:tel => tel})
+    return find_address_by_condition(["tel like ?", "%"+tel+"%"])
   end
 
   def self.find_preference_by_tel(tel)
-    return find_preference_by_condition({:tel => tel})
+    return find_preference_by_condition(["tel like ?", "%"+tel+"%"])
   end
 
   def self.find_address_by_addr(location, region)
@@ -46,7 +46,7 @@ class Customer < ActiveRecord::Base
     result = Array.new
     customers = Customer.where cond
     customers.each do |c|
-      addresses = Address.find_by_sql ["select distinct addresses.* from items join deliveries on items.delivery_id=deliveries.id join orders on items.order_id=orders.id join addresses on deliveries.ship_to_id=addresses.id where orders.who_id=?", c.id]
+      addresses = Address.find_by_sql ["select distinct addresses.region as region, addresses.location as location, customers.tel as tel from items join deliveries on items.delivery_id=deliveries.id join orders on items.order_id=orders.id join addresses on deliveries.ship_to_id=addresses.id join customers on customers.id=orders.who_id where orders.who_id=?", c.id]
       addresses.each do |a|
         result.insert -1, a
       end
