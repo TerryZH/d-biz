@@ -19,13 +19,15 @@
 
 <div class="history">
 
+  <div id="cos">
   <ul class="th">
     <li><%= I18n.t('views.welcome.index.history') %></li>
   </ul>
-  <div id="cos_url" hidden="true">
-    <%= url_for :controller => "customers", :action => "details", :tel=>"_tel_ph_", :format => "json" %>
-  </div>
+  <label id="cos_url_root" hidden="true">
+    <%= url_for :controller => "customers", :action => "details", :format => "json" %>
+  </label>
   <%= render :partial => 'orders/cos'%>
+  </div>
 
 </div>
 
