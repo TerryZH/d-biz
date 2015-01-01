@@ -26,7 +26,7 @@ $ ->
     COSUtil.getCustomerOrderSummary(url_root, param, "new_order_tel", "address_detail", "cos")
 
 # check storage when selecting number for items
-  $(".select_item_number").change ->
+  $(".select_item_number").change (e) ->
     itemCount=$("#new_order_item_count").attr("value")
     items=HashMap.createNew()
     for i in [0...itemCount]
