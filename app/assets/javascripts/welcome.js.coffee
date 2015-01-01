@@ -30,7 +30,7 @@ $ ->
     itemCount=$("#new_order_item_count").attr("value")
     items=HashMap.createNew()
     for i in [0...itemCount]
-      k=$("#new_order_prod_sn_"+i)[0].value
+      k=$("#new_order_product_sn_"+i)[0].value
       v=eval($("#new_order_number_sn_"+i)[0].value)
       items.add(k,v)
 
