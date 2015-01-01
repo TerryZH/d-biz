@@ -10,8 +10,8 @@ $ ->
     newItem.html(newItem.html().replaceAll("_sn_0","_sn_"+itemNum))
     $("#add_new_order_item").before(newItem)
     $("#new_order_item_count").attr("value",itemNum+1)
-    newItem.children().children(".select_item_number").change ->
-      checkStorage()
+    newItem.children().children(".select_item_number").change (e) ->
+      checkStorage(e)
 
 # find cos per tel #
   $("#new_order_tel").keyup (e) ->
@@ -26,14 +26,13 @@ $ ->
     COSUtil.getCustomerOrderSummary(url_root, param, "new_order_tel", "address_detail", "cos")
 
 # check storage when selecting number for items
-  $(".select_item_number").change (e) ->
+  checkStorage=(e) ->
     itemCount=$("#new_order_item_count").attr("value")
     items=HashMap.createNew()
     for i in [0...itemCount]
       k=$("#new_order_product_sn_"+i)[0].value
       v=eval($("#new_order_number_sn_"+i)[0].value)
       items.add(k,v)
-
     evt=e||window.event
     eventSrc=evt.target||evt.srcElement
     p_id=$("#"+eventSrc.id.replace("number","product"))[0].value
@@ -41,6 +40,9 @@ $ ->
     supplyNum=eval($("#storage_of_pid_"+p_id)[0].innerHTML)
     if demandNum > supplyNum
       alert $("#text_out_of_storage")[0].innerHTML.format(supplyNum)
+
+  $(".select_item_number").change (e) ->
+    checkStorage(e)
 
 # update profit estimation when cost changed
   $("#prom_p_day").keyup ->
