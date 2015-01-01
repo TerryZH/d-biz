@@ -36,7 +36,7 @@ $ ->
 
     evt=e||window.event
     eventSrc=evt.target||evt.srcElement
-    p_id=$("#"+eventSrc.id.replace("number","prod"))[0].value
+    p_id=$("#"+eventSrc.id.replace("number","product"))[0].value
     demandNum=items.get(p_id)
     supplyNum=eval($("#storage_of_pid_"+p_id)[0].innerHTML)
     if demandNum > supplyNum
