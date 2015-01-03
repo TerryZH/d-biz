@@ -104,10 +104,10 @@ ActiveRecord::Schema.define(version: 20141212020018) do
 
   create_table "products", force: true do |t|
     t.string   "name"
+    t.float    "price"
+    t.float    "cost"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "cost"
-    t.float    "price"
   end
 
   create_table "profits", force: true do |t|
